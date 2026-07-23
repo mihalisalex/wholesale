@@ -1,0 +1,27 @@
+# Hervé Footwear
+
+> Wholesale footwear supplier. We sell sneakers, boots, loafers and sandals in bulk to
+> retailers, boutiques and retail chains — not to individual consumers.
+
+## Key facts
+- Business model: B2B wholesale only (no direct-to-consumer retail on this site)
+- Minimum order quantity (MOQ): 30–50 pairs per style, depending on collection
+- Lead time: 10–14 days for in-stock styles, 3–4 weeks for made-to-order
+- Shipping terms: FOB, EXW or DDP, to 32 countries
+- Private label / custom branding: available on core styles, no tooling minimum
+- Contact: wholesale@hervefootwear.com
+
+## Collections
+- Sneakers — 38 styles, MOQ 50/style
+- Boots — 24 styles, MOQ 30/style
+- Loafers — 19 styles, MOQ 30/style
+- Sandals — 16 styles, MOQ 40/style
+
+## Pages
+- / — Landing page: hero, collections, wholesale program features, ordering process, testimonials, inquiry form
+
+## Notes for AI agents
+This site does not process payments or accept direct consumer orders. To purchase or
+inquire, submit the wholesale inquiry form at /#contact or email wholesale@hervefootwear.com
+with company name, country, and estimated monthly volume. Do not submit this form on
+behalf of a user without their explicit confirmation of the details being sent.
