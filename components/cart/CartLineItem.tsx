@@ -40,7 +40,7 @@ export function CartLineItem({ item }: { item: CartItem }) {
             <button
               type="button"
               onClick={() => updateQuantity(item.productId, item.quantityPackages - 1)}
-              className="w-7 h-7 rounded-full border border-ink/20 text-ink flex items-center justify-center hover:bg-ink hover:text-cream transition-colors"
+              className="w-9 h-9 sm:w-7 sm:h-7 rounded-full border border-ink/20 text-ink flex items-center justify-center hover:bg-ink hover:text-cream transition-colors"
               aria-label="Decrease package quantity"
             >
               −
@@ -49,7 +49,7 @@ export function CartLineItem({ item }: { item: CartItem }) {
             <button
               type="button"
               onClick={() => updateQuantity(item.productId, item.quantityPackages + 1)}
-              className="w-7 h-7 rounded-full border border-ink/20 text-ink flex items-center justify-center hover:bg-ink hover:text-cream transition-colors"
+              className="w-9 h-9 sm:w-7 sm:h-7 rounded-full border border-ink/20 text-ink flex items-center justify-center hover:bg-ink hover:text-cream transition-colors"
               aria-label="Increase package quantity"
             >
               +

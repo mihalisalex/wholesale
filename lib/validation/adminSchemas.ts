@@ -95,4 +95,15 @@ export const siteSettingsSchema = z.object({
     paymentTerms: z.string().min(1),
     termsAndConditions: z.string().min(1),
   }),
+  contact: z.object({
+    whatsappNumber: z.string().min(1),
+    businessHours: z.object({
+      timezone: z.string().min(1),
+      weekdayLabel: z.string().min(1),
+      weekendLabel: z.string().min(1),
+      startHour: z.number().int().min(0).max(23),
+      endHour: z.number().int().min(0).max(23),
+      days: z.array(z.number().int().min(0).max(6)),
+    }),
+  }),
 });

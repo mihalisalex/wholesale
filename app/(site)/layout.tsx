@@ -5,8 +5,10 @@ import { CartProvider } from "@/context/CartContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartRoot } from "@/components/cart/CartRoot";
+import { MobileChrome } from "@/components/mobile/MobileChrome";
 import { siteConfig } from "@/config/site.config";
 import { getSeoSettings } from "@/lib/seo";
+import { getAllProducts } from "@/lib/products";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"], weight: ["500", "600", "700"] });
@@ -23,6 +25,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const products = getAllProducts();
+
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
       <head>
@@ -50,9 +54,13 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body className="font-sans">
         <CartProvider>
           <Header />
-          <div className="pt-[78px]">{children}</div>
-          <Footer />
+          <div className="pt-14 md:pt-[78px]">
+            {children}
+            <Footer />
+          </div>
+          <div className="pb-20 md:hidden" aria-hidden="true" />
           <CartRoot />
+          <MobileChrome products={products} />
         </CartProvider>
       </body>
     </html>

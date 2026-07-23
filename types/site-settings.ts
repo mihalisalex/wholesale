@@ -41,4 +41,16 @@ export interface SiteSettings {
     paymentTerms: string;
     termsAndConditions: string;
   };
+  contact: {
+    whatsappNumber: string;
+    businessHours: {
+      timezone: string;
+      weekdayLabel: string;
+      weekendLabel: string;
+      startHour: number;
+      endHour: number;
+      /** 0 = Sunday … 6 = Saturday */
+      days: number[];
+    };
+  };
 }

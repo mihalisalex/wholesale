@@ -32,7 +32,7 @@ export function OrderForm({ defaultValues, onSubmit, onCancel }: OrderFormProps)
         <label className={labelClasses} htmlFor="companyName">
           Company name
         </label>
-        <input id="companyName" className={inputClasses} {...register("companyName")} />
+        <input id="companyName" autoComplete="organization" className={inputClasses} {...register("companyName")} />
         {errors.companyName && <p className="text-xs text-accent-3 mt-1">{errors.companyName.message}</p>}
       </div>
 
@@ -41,13 +41,13 @@ export function OrderForm({ defaultValues, onSubmit, onCancel }: OrderFormProps)
           <label className={labelClasses} htmlFor="vatNumber">
             VAT number
           </label>
-          <input id="vatNumber" className={inputClasses} {...register("vatNumber")} />
+          <input id="vatNumber" autoComplete="off" className={inputClasses} {...register("vatNumber")} />
         </div>
         <div>
           <label className={labelClasses} htmlFor="contactName">
             Contact person
           </label>
-          <input id="contactName" className={inputClasses} {...register("contactName")} />
+          <input id="contactName" autoComplete="name" className={inputClasses} {...register("contactName")} />
           {errors.contactName && <p className="text-xs text-accent-3 mt-1">{errors.contactName.message}</p>}
         </div>
       </div>
@@ -57,14 +57,14 @@ export function OrderForm({ defaultValues, onSubmit, onCancel }: OrderFormProps)
           <label className={labelClasses} htmlFor="email">
             Email
           </label>
-          <input id="email" type="email" className={inputClasses} {...register("email")} />
+          <input id="email" type="email" inputMode="email" autoComplete="email" className={inputClasses} {...register("email")} />
           {errors.email && <p className="text-xs text-accent-3 mt-1">{errors.email.message}</p>}
         </div>
         <div>
           <label className={labelClasses} htmlFor="phone">
             Phone
           </label>
-          <input id="phone" className={inputClasses} {...register("phone")} />
+          <input id="phone" type="tel" inputMode="tel" autoComplete="tel" className={inputClasses} {...register("phone")} />
           {errors.phone && <p className="text-xs text-accent-3 mt-1">{errors.phone.message}</p>}
         </div>
       </div>
@@ -74,14 +74,14 @@ export function OrderForm({ defaultValues, onSubmit, onCancel }: OrderFormProps)
           <label className={labelClasses} htmlFor="country">
             Country
           </label>
-          <input id="country" className={inputClasses} {...register("country")} />
+          <input id="country" autoComplete="country-name" className={inputClasses} {...register("country")} />
           {errors.country && <p className="text-xs text-accent-3 mt-1">{errors.country.message}</p>}
         </div>
         <div>
           <label className={labelClasses} htmlFor="city">
             City
           </label>
-          <input id="city" className={inputClasses} {...register("city")} />
+          <input id="city" autoComplete="address-level2" className={inputClasses} {...register("city")} />
           {errors.city && <p className="text-xs text-accent-3 mt-1">{errors.city.message}</p>}
         </div>
       </div>
@@ -90,7 +90,7 @@ export function OrderForm({ defaultValues, onSubmit, onCancel }: OrderFormProps)
         <label className={labelClasses} htmlFor="shippingAddress">
           Shipping address
         </label>
-        <textarea id="shippingAddress" rows={2} className={inputClasses} {...register("shippingAddress")} />
+        <textarea id="shippingAddress" rows={2} autoComplete="street-address" className={inputClasses} {...register("shippingAddress")} />
         {errors.shippingAddress && <p className="text-xs text-accent-3 mt-1">{errors.shippingAddress.message}</p>}
       </div>
 

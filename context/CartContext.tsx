@@ -52,7 +52,7 @@ interface CartContextValue {
   hasHydrated: boolean;
   isDrawerOpen: boolean;
   totals: { totalPackages: number; totalPairs: number; grandTotal: number };
-  addItem: (item: Omit<CartItem, "quantityPackages">, quantityPackages: number) => void;
+  addItem: (item: Omit<CartItem, "quantityPackages">, quantityPackages: number, options?: { openDrawer?: boolean }) => void;
   updateQuantity: (productId: string, quantityPackages: number) => void;
   removeItem: (productId: string) => void;
   clearCart: () => void;
@@ -98,9 +98,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
     hasHydrated,
     isDrawerOpen,
     totals,
-    addItem: (item, quantityPackages) => {
+    addItem: (item, quantityPackages, options) => {
       dispatch({ type: "ADD_ITEM", payload: { item, quantityPackages } });
-      setDrawerOpen(true);
+      if (options?.openDrawer ?? true) setDrawerOpen(true);
     },
     updateQuantity: (productId, quantityPackages) =>
       dispatch({ type: "UPDATE_QUANTITY", payload: { productId, quantityPackages } }),

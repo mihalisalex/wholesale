@@ -3,9 +3,11 @@
 import { useState } from "react";
 import type { Product } from "@/types/product";
 import { QuantityStepper } from "./QuantityStepper";
+import { StickyMobileAddBar } from "./StickyMobileAddBar";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/hooks/useCart";
 import { formatCurrency, pairsForPackages } from "@/lib/format";
+import { buildProductInquiryMessage, buildWhatsAppLink } from "@/lib/contact";
 
 const STOCK_LABEL: Record<Product["stockStatus"], string> = {
   "in-stock": "In Stock",
@@ -66,6 +68,18 @@ export function ProductInfo({ product }: { product: Product }) {
         </span>
       </div>
 
+      <a
+        href={buildWhatsAppLink(buildProductInquiryMessage(product))}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="md:hidden inline-flex items-center gap-2 text-sm font-semibold text-accent-2 mb-5"
+      >
+        <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+          <path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.3A9 9 0 1 0 12 3Z" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        Ask about this product on WhatsApp
+      </a>
+
       <p className="text-ink/60 mb-6 max-w-prose">{product.description}</p>
 
       <dl className="grid grid-cols-2 gap-y-3 gap-x-6 text-sm mb-6 border-y border-ink/10 py-5">
@@ -115,6 +129,14 @@ export function ProductInfo({ product }: { product: Product }) {
           {justAdded ? "Added to Cart ✓" : "Add to Cart"}
         </Button>
       </div>
+
+      <StickyMobileAddBar
+        quantity={quantity}
+        onQuantityChange={setQuantity}
+        total={total}
+        justAdded={justAdded}
+        onAdd={handleAdd}
+      />
     </div>
   );
 }

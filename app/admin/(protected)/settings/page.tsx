@@ -313,6 +313,123 @@ export default function AdminSettingsPage() {
         </section>
 
         <section className="space-y-4">
+          <h2 className="font-serif text-lg font-semibold">Contact &amp; WhatsApp</h2>
+          <div>
+            <label className={labelClasses}>WhatsApp number</label>
+            <input
+              className={inputClasses}
+              value={settings.contact.whatsappNumber}
+              onChange={(e) => setSettings({ ...settings, contact: { ...settings.contact, whatsappNumber: e.target.value } })}
+            />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className={labelClasses}>Timezone (IANA)</label>
+              <input
+                className={inputClasses}
+                value={settings.contact.businessHours.timezone}
+                onChange={(e) =>
+                  setSettings({
+                    ...settings,
+                    contact: { ...settings.contact, businessHours: { ...settings.contact.businessHours, timezone: e.target.value } },
+                  })
+                }
+              />
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div>
+                <label className={labelClasses}>Open hour</label>
+                <input
+                  type="number"
+                  min={0}
+                  max={23}
+                  className={inputClasses}
+                  value={settings.contact.businessHours.startHour}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      contact: {
+                        ...settings.contact,
+                        businessHours: { ...settings.contact.businessHours, startHour: Number(e.target.value) },
+                      },
+                    })
+                  }
+                />
+              </div>
+              <div>
+                <label className={labelClasses}>Close hour</label>
+                <input
+                  type="number"
+                  min={0}
+                  max={23}
+                  className={inputClasses}
+                  value={settings.contact.businessHours.endHour}
+                  onChange={(e) =>
+                    setSettings({
+                      ...settings,
+                      contact: {
+                        ...settings.contact,
+                        businessHours: { ...settings.contact.businessHours, endHour: Number(e.target.value) },
+                      },
+                    })
+                  }
+                />
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className={labelClasses}>Weekday hours label</label>
+              <input
+                className={inputClasses}
+                value={settings.contact.businessHours.weekdayLabel}
+                onChange={(e) =>
+                  setSettings({
+                    ...settings,
+                    contact: { ...settings.contact, businessHours: { ...settings.contact.businessHours, weekdayLabel: e.target.value } },
+                  })
+                }
+              />
+            </div>
+            <div>
+              <label className={labelClasses}>Weekend hours label</label>
+              <input
+                className={inputClasses}
+                value={settings.contact.businessHours.weekendLabel}
+                onChange={(e) =>
+                  setSettings({
+                    ...settings,
+                    contact: { ...settings.contact, businessHours: { ...settings.contact.businessHours, weekendLabel: e.target.value } },
+                  })
+                }
+              />
+            </div>
+          </div>
+          <div>
+            <label className={labelClasses}>Open days (0 = Sun … 6 = Sat, comma-separated)</label>
+            <input
+              className={inputClasses}
+              value={settings.contact.businessHours.days.join(",")}
+              onChange={(e) =>
+                setSettings({
+                  ...settings,
+                  contact: {
+                    ...settings.contact,
+                    businessHours: {
+                      ...settings.contact.businessHours,
+                      days: e.target.value
+                        .split(",")
+                        .map((d) => Number(d.trim()))
+                        .filter((d) => !Number.isNaN(d)),
+                    },
+                  },
+                })
+              }
+            />
+          </div>
+        </section>
+
+        <section className="space-y-4">
           <h2 className="font-serif text-lg font-semibold">Terms</h2>
           <div>
             <label className={labelClasses}>Default payment terms</label>

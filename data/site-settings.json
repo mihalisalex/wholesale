@@ -39,5 +39,16 @@
   "terms": {
     "paymentTerms": "50% deposit due upon Pro Forma Invoice confirmation, balance due prior to shipment, payable by bank transfer to the account above.",
     "termsAndConditions": "This document is a Pro Forma Invoice issued for quotation purposes only and does not constitute a final invoice or a confirmed order. Prices are subject to change until confirmed in writing. Goods remain the property of Hervé Footwear until paid in full. All wholesale orders are final upon deposit receipt."
+  },
+  "contact": {
+    "whatsappNumber": "+30 69 0000 0000 — REPLACE ME",
+    "businessHours": {
+      "timezone": "Europe/Athens",
+      "weekdayLabel": "Mon–Fri, 9:00–18:00",
+      "weekendLabel": "Closed Saturday & Sunday",
+      "startHour": 9,
+      "endHour": 18,
+      "days": [1, 2, 3, 4, 5]
+    }
   }
 }

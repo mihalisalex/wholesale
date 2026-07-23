@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { MegaMenu } from "./MegaMenu";
 import { Button } from "@/components/ui/Button";
+import { useCart } from "@/hooks/useCart";
+import { formatNumber } from "@/lib/format";
 
 const NAV_LINKS = [
+  { href: "/quick-order", label: "Quick Order" },
   { href: "/#why", label: "Why Hervé" },
   { href: "/#process", label: "Process" },
   { href: "/#testimonials", label: "Retailers" },
@@ -13,12 +15,13 @@ const NAV_LINKS = [
 ];
 
 export function Header() {
-  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { totals, openDrawer, hasHydrated, state } = useCart();
+  const hasItems = hasHydrated && state.items.length > 0;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-[200] bg-cream/70 backdrop-blur-md backdrop-saturate-150 border-b border-ink/10">
       <div className="absolute left-0 right-0 bottom-[-1px] h-px bg-gradient-to-r from-transparent via-gold to-transparent opacity-50" />
-      <div className="max-w-[1200px] mx-auto px-5 md:px-8 flex items-center justify-between h-[78px]">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-8 flex items-center justify-between h-14 md:h-[78px]">
         <Link href="/" className="flex items-center gap-2 font-serif text-xl font-semibold" aria-label="Hervé Footwear home">
           <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
             <circle cx="15" cy="15" r="14.25" stroke="currentColor" strokeWidth="1" />
@@ -47,43 +50,27 @@ export function Header() {
           <Button href="/catalog" size="sm" className="hidden md:inline-flex">
             Browse Catalog
           </Button>
+
+          {/* Mobile: primary nav lives in the sticky BottomNav, so the header is just logo + cart. */}
           <button
             type="button"
-            className="md:hidden w-8 h-8 flex flex-col justify-center gap-1.5"
-            aria-expanded={isMobileOpen}
-            aria-controls="mobile-nav"
-            aria-label="Toggle menu"
-            onClick={() => setIsMobileOpen((v) => !v)}
+            onClick={openDrawer}
+            aria-label="Open wholesale order cart"
+            className="md:hidden relative w-10 h-10 flex items-center justify-center"
           >
-            <span className="h-px bg-ink" />
-            <span className="h-px bg-ink" />
-            <span className="h-px bg-ink" />
+            <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.7">
+              <path d="M4 4h2l2.4 12.4a2 2 0 0 0 2 1.6h7.2a2 2 0 0 0 2-1.6L21 8H7" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="10" cy="21" r="1.4" />
+              <circle cx="18" cy="21" r="1.4" />
+            </svg>
+            {hasItems && (
+              <span className="absolute top-0.5 right-0.5 bg-accent-3 text-white text-[10px] font-bold w-[18px] h-[18px] rounded-full flex items-center justify-center">
+                {formatNumber(totals.totalPackages)}
+              </span>
+            )}
           </button>
         </div>
       </div>
-
-      {isMobileOpen && (
-        <nav id="mobile-nav" className="md:hidden border-t border-ink/10 bg-cream px-5 pb-5 max-h-[calc(100vh-78px)] overflow-y-auto">
-          <MegaMenu onNavigate={() => setIsMobileOpen(false)} />
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setIsMobileOpen(false)}
-              className="block py-3.5 text-sm font-medium border-b border-ink/10"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/catalog"
-            onClick={() => setIsMobileOpen(false)}
-            className="block mt-4 text-center rounded-full bg-ink text-cream py-3 text-sm font-semibold"
-          >
-            Browse Catalog
-          </Link>
-        </nav>
-      )}
     </header>
   );
 }

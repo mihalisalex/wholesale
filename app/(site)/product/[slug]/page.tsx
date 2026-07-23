@@ -29,7 +29,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const related = getRelatedProducts(product);
 
   return (
-    <main>
+    <main className="pb-20 md:pb-0">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8 py-12 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
           <Gallery images={product.images} colorHex={product.colorHex} />

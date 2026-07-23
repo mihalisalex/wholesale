@@ -5,6 +5,7 @@ import { useCart } from "@/hooks/useCart";
 import { CartLineItem } from "./CartLineItem";
 import { CartTotals } from "./CartTotals";
 import { Button } from "@/components/ui/Button";
+import { buildCartShareMessage, buildWhatsAppLink } from "@/lib/contact";
 
 interface CartDrawerProps {
   onRequestInvoice: () => void;
@@ -19,7 +20,7 @@ export function CartDrawer({ onRequestInvoice }: CartDrawerProps) {
       {isDrawerOpen && (
         <>
           <motion.div
-            className="fixed inset-0 bg-ink/40 z-[90]"
+            className="fixed inset-0 bg-ink/40 z-[205]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -29,7 +30,7 @@ export function CartDrawer({ onRequestInvoice }: CartDrawerProps) {
           <motion.aside
             role="dialog"
             aria-label="Wholesale order cart"
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-cream z-[100] shadow-brand flex flex-col"
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-cream z-[210] shadow-brand flex flex-col"
             initial={{ x: "100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -59,7 +60,7 @@ export function CartDrawer({ onRequestInvoice }: CartDrawerProps) {
             </div>
 
             {!isEmpty && (
-              <div className="px-6 py-5 border-t border-ink/10 space-y-4">
+              <div className="px-6 py-5 border-t border-ink/10 space-y-3">
                 <CartTotals {...totals} />
                 <Button
                   className="w-full"
@@ -70,6 +71,17 @@ export function CartDrawer({ onRequestInvoice }: CartDrawerProps) {
                 >
                   Request Pro Forma Invoice
                 </Button>
+                <a
+                  href={buildWhatsAppLink(buildCartShareMessage(state.items, totals))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full rounded-full border border-ink/15 text-ink font-semibold py-3 text-sm hover:border-accent-2 hover:text-accent-2 transition-colors"
+                >
+                  <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.3A9 9 0 1 0 12 3Z" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  Share via WhatsApp
+                </a>
                 <p className="text-xs text-ink/40 text-center">No payment collected here — this submits a quotation request.</p>
               </div>
             )}

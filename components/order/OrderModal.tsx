@@ -24,7 +24,7 @@ export function OrderModal({ isOpen, onClose }: OrderModalProps) {
       {isOpen && (
         <>
           <motion.div
-            className="fixed inset-0 bg-ink/50 z-[110]"
+            className="fixed inset-0 bg-ink/50 z-[215]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -106,7 +106,7 @@ function OrderModalContent({ onClose }: { onClose: () => void }) {
       role="dialog"
       aria-modal="true"
       aria-label="Request a Pro Forma Invoice"
-      className="fixed inset-0 z-[120] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[220] flex items-center justify-center p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

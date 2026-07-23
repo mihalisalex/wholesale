@@ -26,13 +26,15 @@ export function CollectionsGrid() {
             <Reveal key={c.category} delay={i * 0.05}>
               <Link
                 href={`/catalog?category=${c.category}`}
-                className="block bg-white border border-ink/10 rounded-brand p-6 h-full transition-transform duration-300 ease-brand hover:-translate-y-1.5 hover:shadow-brand"
+                className="flex sm:block items-center gap-5 sm:gap-0 bg-white border border-ink/10 rounded-brand p-5 sm:p-6 h-full transition-transform duration-300 ease-brand hover:-translate-y-1.5 hover:shadow-brand active:scale-[0.98]"
               >
-                <div className="bg-cream-dim rounded-brand-sm p-5 mb-5 text-gold">
+                <div className="w-20 h-20 sm:w-auto sm:h-auto shrink-0 bg-cream-dim rounded-brand-sm p-3 sm:p-5 sm:mb-5 text-gold">
                   <ProductLineArt art={c.art} className="w-full h-auto" />
                 </div>
-                <h3 className="font-serif text-lg font-semibold mb-1.5">{c.label}</h3>
-                <p className="text-sm text-ink/60">{c.description}</p>
+                <div>
+                  <h3 className="font-serif text-lg font-semibold mb-1.5">{c.label}</h3>
+                  <p className="text-sm text-ink/60">{c.description}</p>
+                </div>
               </Link>
             </Reveal>
           ))}
