@@ -1,0 +1,32 @@
+[
+  {
+    "id": "col-classics",
+    "name": "The Classics",
+    "slug": "the-classics",
+    "description": "Oxfords, penny loafers and ballet flats — the year-round core assortment."
+  },
+  {
+    "id": "col-heritage-boots",
+    "name": "Heritage Boots",
+    "slug": "heritage-boots",
+    "description": "Chelsea and heeled ankle boots in leather and suede."
+  },
+  {
+    "id": "col-studio-sneakers",
+    "name": "Studio Sneakers",
+    "slug": "studio-sneakers",
+    "description": "Minimal leather court sneakers for everyday assortments."
+  },
+  {
+    "id": "col-evening",
+    "name": "Evening",
+    "slug": "evening",
+    "description": "Pointed-toe pumps built for evening and formal assortments."
+  },
+  {
+    "id": "col-resort",
+    "name": "Resort",
+    "slug": "resort",
+    "description": "Heeled strappy sandals for resort and summer lines."
+  }
+]

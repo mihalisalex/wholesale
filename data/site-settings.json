@@ -1,0 +1,43 @@
+{
+  "company": {
+    "name": "Hervé Footwear",
+    "legalName": "Hervé Footwear — REPLACE ME (legal entity name)",
+    "logoPath": "/logo.svg",
+    "email": "wholesale@hervefootwear.com",
+    "phone": "+30 21 0000 0000 — REPLACE ME",
+    "website": "https://www.hervefootwear.com",
+    "address": {
+      "line1": "REPLACE ME (street address)",
+      "city": "Athens",
+      "postalCode": "REPLACE ME",
+      "country": "Greece"
+    },
+    "vatNumber": "EL000000000 — REPLACE ME"
+  },
+  "banking": {
+    "bankName": "REPLACE ME (bank name)",
+    "iban": "XX00 0000 0000 0000 0000 00 — REPLACE ME",
+    "swiftBic": "REPLACE ME (SWIFT/BIC)",
+    "accountHolder": "Hervé Footwear — REPLACE ME (legal entity name)"
+  },
+  "commerce": {
+    "currency": "EUR",
+    "currencySymbol": "€",
+    "taxRatePercent": 0,
+    "packageSize": 8,
+    "minOrderPackagesNote": "Minimum order: 30 pairs across any combination of styles."
+  },
+  "shipping": {
+    "methods": [
+      { "value": "fob", "label": "FOB (Free On Board)" },
+      { "value": "exw", "label": "EXW (Ex Works)" },
+      { "value": "ddp", "label": "DDP (Delivered Duty Paid)" }
+    ],
+    "estimatedLeadTime": "10–14 days for in-stock styles, 3–4 weeks for made-to-order.",
+    "defaultEstimatedShipping": 0
+  },
+  "terms": {
+    "paymentTerms": "50% deposit due upon Pro Forma Invoice confirmation, balance due prior to shipment, payable by bank transfer to the account above.",
+    "termsAndConditions": "This document is a Pro Forma Invoice issued for quotation purposes only and does not constitute a final invoice or a confirmed order. Prices are subject to change until confirmed in writing. Goods remain the property of Hervé Footwear until paid in full. All wholesale orders are final upon deposit receipt."
+  }
+}

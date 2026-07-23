@@ -1,0 +1,18 @@
+{
+  "siteName": "Hervé Footwear",
+  "titleTemplate": "%s — Hervé Footwear",
+  "defaultDescription": "Browse the Hervé Footwear wholesale catalog, build an order in 8-pair packages, and request a Pro Forma Invoice — no online payment, no checkout, no account required.",
+  "defaultOgImage": "/logo.svg",
+  "twitterHandle": "",
+  "robotsIndexable": true,
+  "pages": {
+    "home": {
+      "title": "Hervé Footwear — Wholesale Footwear Ordering",
+      "description": "Browse the Hervé Footwear wholesale catalog, build an order in 8-pair packages, and request a Pro Forma Invoice — no online payment, no checkout, no account required."
+    },
+    "catalog": {
+      "title": "Wholesale Catalog",
+      "description": "Browse the full Hervé Footwear wholesale catalog and build your order in 8-pair packages."
+    }
+  }
+}

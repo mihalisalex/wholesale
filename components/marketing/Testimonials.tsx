@@ -1,0 +1,42 @@
+import { SectionHead } from "@/components/ui/SectionHead";
+import { Reveal } from "@/components/ui/Reveal";
+
+const TESTIMONIALS = [
+  {
+    quote: "Sample-to-shelf in under six weeks, and the QC pass rate has been flawless across three seasons.",
+    author: "Alina Moreau",
+    role: "Buyer, Rue Cabot Boutique, Lyon",
+  },
+  {
+    quote: "Building the order online and getting a Pro Forma back the same day cut our lead time in half.",
+    author: "Daniel Osei",
+    role: "Owner, Kessington Footwear, Accra",
+  },
+  {
+    quote: "Private label setup was painless — our branding was on the insoles by the second production run.",
+    author: "Marisol Vega",
+    role: "Merchandising Lead, Calle Nueve, Mexico City",
+  },
+];
+
+export function Testimonials() {
+  return (
+    <section id="testimonials" className="py-20 md:py-28 bg-cream-dim">
+      <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+        <SectionHead eyebrow="Trusted By Retailers" title="What our buyers say." />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {TESTIMONIALS.map((t, i) => (
+            <Reveal key={t.author} delay={i * 0.05}>
+              <figure className="bg-white border border-ink/10 rounded-brand p-7 h-full">
+                <blockquote className="font-serif italic text-lg text-ink mb-5 leading-relaxed">&ldquo;{t.quote}&rdquo;</blockquote>
+                <figcaption className="text-sm text-ink/50">
+                  <strong className="text-ink">{t.author}</strong> — {t.role}
+                </figcaption>
+              </figure>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

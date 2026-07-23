@@ -1,0 +1,166 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import type { Product } from "@/types/product";
+import type { FilterOptions } from "@/lib/products";
+import { FilterSidebar, type CatalogFilters } from "./FilterSidebar";
+import { ProductCard } from "./ProductCard";
+
+type SortKey = "newest" | "price-asc" | "price-desc" | "alphabetical";
+
+interface CatalogClientProps {
+  products: Product[];
+  options: FilterOptions;
+}
+
+function readList(params: URLSearchParams, key: string): string[] {
+  const value = params.get(key);
+  return value ? value.split(",").filter(Boolean) : [];
+}
+
+export function CatalogClient({ products, options }: CatalogClientProps) {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const [search, setSearch] = useState(searchParams.get("q") ?? "");
+  const [sort, setSort] = useState<SortKey>((searchParams.get("sort") as SortKey) ?? "newest");
+  const [filters, setFilters] = useState<CatalogFilters>({
+    category: readList(searchParams, "category"),
+    color: readList(searchParams, "color"),
+    material: readList(searchParams, "material"),
+    size: readList(searchParams, "size"),
+    collection: readList(searchParams, "collection"),
+    gender: readList(searchParams, "gender"),
+    newArrivalsOnly: searchParams.get("isNewArrival") === "true",
+    minPrice: Number(searchParams.get("minPrice") ?? options.priceRange.min),
+    maxPrice: Number(searchParams.get("maxPrice") ?? options.priceRange.max),
+  });
+
+  function applyFilters(next: CatalogFilters) {
+    setFilters(next);
+    syncUrl(next, search, sort);
+  }
+
+  function syncUrl(f: CatalogFilters, q: string, s: SortKey) {
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (s !== "newest") params.set("sort", s);
+    if (f.category.length) params.set("category", f.category.join(","));
+    if (f.color.length) params.set("color", f.color.join(","));
+    if (f.material.length) params.set("material", f.material.join(","));
+    if (f.size.length) params.set("size", f.size.join(","));
+    if (f.collection.length) params.set("collection", f.collection.join(","));
+    if (f.gender.length) params.set("gender", f.gender.join(","));
+    if (f.newArrivalsOnly) params.set("isNewArrival", "true");
+    if (f.minPrice !== options.priceRange.min) params.set("minPrice", String(f.minPrice));
+    if (f.maxPrice !== options.priceRange.max) params.set("maxPrice", String(f.maxPrice));
+    router.replace(`/catalog${params.toString() ? `?${params.toString()}` : ""}`, { scroll: false });
+  }
+
+  function resetFilters() {
+    const cleared: CatalogFilters = {
+      category: [],
+      color: [],
+      material: [],
+      size: [],
+      collection: [],
+      gender: [],
+      newArrivalsOnly: false,
+      minPrice: options.priceRange.min,
+      maxPrice: options.priceRange.max,
+    };
+    setFilters(cleared);
+    setSearch("");
+    syncUrl(cleared, "", sort);
+  }
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+
+    let list = products.filter((p) => {
+      if (q && !`${p.name} ${p.sku} ${p.tags.join(" ")}`.toLowerCase().includes(q)) return false;
+      if (filters.category.length && !filters.category.includes(p.category)) return false;
+      if (filters.color.length && !filters.color.includes(p.color)) return false;
+      if (filters.material.length && !filters.material.includes(p.material)) return false;
+      if (filters.size.length && !filters.size.some((s) => p.sizes.includes(s))) return false;
+      if (filters.collection.length && !filters.collection.includes(p.collection)) return false;
+      if (filters.gender.length && !filters.gender.includes(p.gender)) return false;
+      if (filters.newArrivalsOnly && !p.isNewArrival) return false;
+      if (p.pricePerPackage < filters.minPrice || p.pricePerPackage > filters.maxPrice) return false;
+      return true;
+    });
+
+    list = [...list].sort((a, b) => {
+      switch (sort) {
+        case "price-asc":
+          return a.pricePerPackage - b.pricePerPackage;
+        case "price-desc":
+          return b.pricePerPackage - a.pricePerPackage;
+        case "alphabetical":
+          return a.name.localeCompare(b.name);
+        case "newest":
+        default:
+          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+      }
+    });
+
+    return list;
+  }, [products, search, filters, sort]);
+
+  return (
+    <div className="flex flex-col lg:flex-row gap-10">
+      <FilterSidebar options={options} filters={filters} onChange={applyFilters} onReset={resetFilters} />
+
+      <div className="flex-1">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+          <div className="relative flex-1 max-w-sm">
+            <input
+              type="search"
+              value={search}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                syncUrl(filters, e.target.value, sort);
+              }}
+              placeholder="Search by name, SKU or tag…"
+              className="w-full rounded-full border border-ink/15 bg-white px-4 py-2.5 text-sm focus:outline-none focus:border-gold"
+            />
+          </div>
+
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-ink/50">{filtered.length} styles</span>
+            <select
+              value={sort}
+              onChange={(e) => {
+                const next = e.target.value as SortKey;
+                setSort(next);
+                syncUrl(filters, search, next);
+              }}
+              className="rounded-full border border-ink/15 bg-white px-3.5 py-2.5 text-sm"
+            >
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="alphabetical">Alphabetical</option>
+            </select>
+          </div>
+        </div>
+
+        {filtered.length === 0 ? (
+          <div className="py-24 text-center text-ink/50">
+            <p className="font-serif text-xl mb-2">No styles match those filters.</p>
+            <button type="button" onClick={resetFilters} className="text-gold underline text-sm">
+              Reset filters
+            </button>
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-5 md:gap-6">
+            {filtered.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}

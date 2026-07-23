@@ -1,0 +1,681 @@
+[
+  {
+    "id": "p-oxford-black",
+    "slug": "oxford-cap-toe-black",
+    "sku": "HF-104-BLK",
+    "name": "The Oxford — Black",
+    "category": "loafers",
+    "collection": "The Classics",
+    "gender": "men",
+    "description": "A cap-toe lace-up dress Oxford in full-grain calfskin, built on a low-profile leather sole. The house's best-selling formal silhouette, finished with hand-burnished edges.",
+    "color": "Black",
+    "colorHex": "#15161B",
+    "material": "Full-grain calfskin leather",
+    "sizes": [
+      "EU 40",
+      "EU 41",
+      "EU 42",
+      "EU 43",
+      "EU 44",
+      "EU 45",
+      "EU 46"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 176,
+    "images": [
+      {
+        "art": "oxford",
+        "alt": "The Oxford in black, side profile"
+      },
+      {
+        "art": "oxford",
+        "alt": "The Oxford in black, detail of the cap-toe stitch"
+      }
+    ],
+    "tags": [
+      "formal",
+      "leather",
+      "classic",
+      "bestseller"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-11-02",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–46, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-oxford-tan",
+    "slug": "oxford-cap-toe-tan",
+    "sku": "HF-104-TAN",
+    "name": "The Oxford — Tan",
+    "category": "loafers",
+    "collection": "The Classics",
+    "gender": "men",
+    "description": "A cap-toe lace-up dress Oxford in full-grain calfskin, built on a low-profile leather sole. The tan colorway of the house's best-selling formal silhouette.",
+    "color": "Tan",
+    "colorHex": "#B5793F",
+    "material": "Full-grain calfskin leather",
+    "sizes": [
+      "EU 40",
+      "EU 41",
+      "EU 42",
+      "EU 43",
+      "EU 44",
+      "EU 45",
+      "EU 46"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 176,
+    "images": [
+      {
+        "art": "oxford",
+        "alt": "The Oxford in tan, side profile"
+      },
+      {
+        "art": "oxford",
+        "alt": "The Oxford in tan, detail of the cap-toe stitch"
+      }
+    ],
+    "tags": [
+      "formal",
+      "leather",
+      "classic"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-11-02",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–46, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-chelsea-black",
+    "slug": "chelsea-boot-black",
+    "sku": "HF-118-BLK",
+    "name": "The Chelsea — Black",
+    "category": "boots",
+    "collection": "Heritage Boots",
+    "gender": "men",
+    "description": "An elastic-gusset Chelsea boot in waxed full-grain leather with a stacked heel and a durable rubber outsole built for daily wear.",
+    "color": "Black",
+    "colorHex": "#1A1A1E",
+    "material": "Waxed full-grain leather",
+    "sizes": [
+      "EU 40",
+      "EU 41",
+      "EU 42",
+      "EU 43",
+      "EU 44",
+      "EU 45"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 224,
+    "images": [
+      {
+        "art": "chelsea",
+        "alt": "The Chelsea boot in black, side profile"
+      },
+      {
+        "art": "chelsea",
+        "alt": "The Chelsea boot in black, detail of the elastic gusset"
+      }
+    ],
+    "tags": [
+      "leather",
+      "boot",
+      "bestseller"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-09-18",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–45, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-chelsea-brown",
+    "slug": "chelsea-boot-brown",
+    "sku": "HF-118-BRN",
+    "name": "The Chelsea — Brown",
+    "category": "boots",
+    "collection": "Heritage Boots",
+    "gender": "men",
+    "description": "An elastic-gusset Chelsea boot in waxed full-grain leather with a stacked heel and a durable rubber outsole. The brown colorway.",
+    "color": "Brown",
+    "colorHex": "#5B3A24",
+    "material": "Waxed full-grain leather",
+    "sizes": [
+      "EU 40",
+      "EU 41",
+      "EU 42",
+      "EU 43",
+      "EU 44",
+      "EU 45"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 224,
+    "images": [
+      {
+        "art": "chelsea",
+        "alt": "The Chelsea boot in brown, side profile"
+      },
+      {
+        "art": "chelsea",
+        "alt": "The Chelsea boot in brown, detail of the elastic gusset"
+      }
+    ],
+    "tags": [
+      "leather",
+      "boot"
+    ],
+    "stockStatus": "low-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-09-18",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–45, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-penny-tan",
+    "slug": "penny-loafer-saddle-tan",
+    "sku": "HF-096-TAN",
+    "name": "The Penny — Saddle Tan",
+    "category": "loafers",
+    "collection": "The Classics",
+    "gender": "men",
+    "description": "A classic penny loafer in Italian-tanned saddle leather with a hand-stitched apron and a flexible leather sole suited to all-day retail floors.",
+    "color": "Saddle Tan",
+    "colorHex": "#9C6B3E",
+    "material": "Italian-tanned saddle leather",
+    "sizes": [
+      "EU 40",
+      "EU 41",
+      "EU 42",
+      "EU 43",
+      "EU 44",
+      "EU 45"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 152,
+    "images": [
+      {
+        "art": "penny",
+        "alt": "The Penny loafer in saddle tan, side profile"
+      },
+      {
+        "art": "penny",
+        "alt": "The Penny loafer in saddle tan, detail of the penny strap"
+      }
+    ],
+    "tags": [
+      "leather",
+      "loafer",
+      "classic"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-10-05",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–45, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-penny-black",
+    "slug": "penny-loafer-black",
+    "sku": "HF-096-BLK",
+    "name": "The Penny — Black",
+    "category": "loafers",
+    "collection": "The Classics",
+    "gender": "men",
+    "description": "A classic penny loafer in Italian-tanned leather with a hand-stitched apron and a flexible leather sole. The black colorway.",
+    "color": "Black",
+    "colorHex": "#17181C",
+    "material": "Italian-tanned leather",
+    "sizes": [
+      "EU 40",
+      "EU 41",
+      "EU 42",
+      "EU 43",
+      "EU 44",
+      "EU 45"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 152,
+    "images": [
+      {
+        "art": "penny",
+        "alt": "The Penny loafer in black, side profile"
+      },
+      {
+        "art": "penny",
+        "alt": "The Penny loafer in black, detail of the penny strap"
+      }
+    ],
+    "tags": [
+      "leather",
+      "loafer",
+      "classic"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-10-05",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–45, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-court-white",
+    "slug": "court-sneaker-white",
+    "sku": "HF-142-WHT",
+    "name": "The Court — White",
+    "category": "sneakers",
+    "collection": "Studio Sneakers",
+    "gender": "men",
+    "description": "A minimal leather court sneaker with a low vulcanized sole and tonal stitching — an everyday silhouette designed to sit alongside tailoring or denim.",
+    "color": "White",
+    "colorHex": "#F3F1EA",
+    "material": "Full-grain leather, rubber sole",
+    "sizes": [
+      "EU 40",
+      "EU 41",
+      "EU 42",
+      "EU 43",
+      "EU 44",
+      "EU 45",
+      "EU 46"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 136,
+    "images": [
+      {
+        "art": "court",
+        "alt": "The Court sneaker in white, side profile"
+      },
+      {
+        "art": "court",
+        "alt": "The Court sneaker in white, detail of the lacing"
+      }
+    ],
+    "tags": [
+      "sneaker",
+      "leather",
+      "everyday",
+      "bestseller"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": true,
+    "createdAt": "2026-06-12",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–46, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-court-navy",
+    "slug": "court-sneaker-navy",
+    "sku": "HF-142-NVY",
+    "name": "The Court — Navy",
+    "category": "sneakers",
+    "collection": "Studio Sneakers",
+    "gender": "men",
+    "description": "A minimal leather court sneaker with a low vulcanized sole and tonal stitching, in a deep navy colorway.",
+    "color": "Navy",
+    "colorHex": "#232C42",
+    "material": "Full-grain leather, rubber sole",
+    "sizes": [
+      "EU 40",
+      "EU 41",
+      "EU 42",
+      "EU 43",
+      "EU 44",
+      "EU 45",
+      "EU 46"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 136,
+    "images": [
+      {
+        "art": "court",
+        "alt": "The Court sneaker in navy, side profile"
+      },
+      {
+        "art": "court",
+        "alt": "The Court sneaker in navy, detail of the lacing"
+      }
+    ],
+    "tags": [
+      "sneaker",
+      "leather",
+      "everyday"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": true,
+    "createdAt": "2026-06-12",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–46, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-stiletto-black",
+    "slug": "stiletto-pump-black",
+    "sku": "HF-207-BLK",
+    "name": "The Stiletto — Black",
+    "category": "heels",
+    "collection": "Evening",
+    "gender": "women",
+    "description": "A pointed-toe pump on a 90mm stiletto heel, built in soft nappa leather with a leather-lined insole for extended wear on the retail floor.",
+    "color": "Black",
+    "colorHex": "#18181C",
+    "material": "Nappa leather",
+    "sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 168,
+    "images": [
+      {
+        "art": "stiletto",
+        "alt": "The Stiletto pump in black, side profile"
+      },
+      {
+        "art": "stiletto",
+        "alt": "The Stiletto pump in black, detail of the heel"
+      }
+    ],
+    "tags": [
+      "heel",
+      "leather",
+      "evening",
+      "bestseller"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-08-14",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 36–41, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-stiletto-nude",
+    "slug": "stiletto-pump-nude",
+    "sku": "HF-207-NUD",
+    "name": "The Stiletto — Nude",
+    "category": "heels",
+    "collection": "Evening",
+    "gender": "women",
+    "description": "A pointed-toe pump on a 90mm stiletto heel in soft nappa leather, in a versatile nude colorway that pairs with most retail assortments.",
+    "color": "Nude",
+    "colorHex": "#D9B08C",
+    "material": "Nappa leather",
+    "sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 168,
+    "images": [
+      {
+        "art": "stiletto",
+        "alt": "The Stiletto pump in nude, side profile"
+      },
+      {
+        "art": "stiletto",
+        "alt": "The Stiletto pump in nude, detail of the heel"
+      }
+    ],
+    "tags": [
+      "heel",
+      "leather",
+      "evening"
+    ],
+    "stockStatus": "made-to-order",
+    "isNewArrival": false,
+    "createdAt": "2025-08-14",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 36–41, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-ballet-black",
+    "slug": "ballet-flat-black",
+    "sku": "HF-183-BLK",
+    "name": "The Ballet — Black",
+    "category": "loafers",
+    "collection": "The Classics",
+    "gender": "women",
+    "description": "A foldable ballet flat in supple nappa leather with an elasticated topline and a packable, low-profile sole — a year-round staple.",
+    "color": "Black",
+    "colorHex": "#1B1B1F",
+    "material": "Nappa leather",
+    "sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 128,
+    "images": [
+      {
+        "art": "ballet",
+        "alt": "The Ballet flat in black, side profile"
+      },
+      {
+        "art": "ballet",
+        "alt": "The Ballet flat in black, detail of the vamp bow"
+      }
+    ],
+    "tags": [
+      "flat",
+      "leather",
+      "everyday",
+      "bestseller"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-07-22",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 36–41, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-ballet-blush",
+    "slug": "ballet-flat-blush",
+    "sku": "HF-183-BLS",
+    "name": "The Ballet — Blush",
+    "category": "loafers",
+    "collection": "The Classics",
+    "gender": "women",
+    "description": "A foldable ballet flat in supple nappa leather with an elasticated topline, in a soft blush colorway for spring/summer assortments.",
+    "color": "Blush",
+    "colorHex": "#E7C3C0",
+    "material": "Nappa leather",
+    "sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 128,
+    "images": [
+      {
+        "art": "ballet",
+        "alt": "The Ballet flat in blush, side profile"
+      },
+      {
+        "art": "ballet",
+        "alt": "The Ballet flat in blush, detail of the vamp bow"
+      }
+    ],
+    "tags": [
+      "flat",
+      "leather",
+      "everyday"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": true,
+    "createdAt": "2026-05-20",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 36–41, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-ankle-black",
+    "slug": "ankle-boot-black-suede",
+    "sku": "HF-231-BLK",
+    "name": "The Ankle — Black Suede",
+    "category": "boots",
+    "collection": "Heritage Boots",
+    "gender": "women",
+    "description": "A heeled ankle boot in brushed suede with a side zip closure and a 55mm block heel, built for both retail floor and window display.",
+    "color": "Black",
+    "colorHex": "#232326",
+    "material": "Brushed suede leather",
+    "sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 216,
+    "images": [
+      {
+        "art": "ankle",
+        "alt": "The Ankle boot in black suede, side profile"
+      },
+      {
+        "art": "ankle",
+        "alt": "The Ankle boot in black suede, detail of the heel"
+      }
+    ],
+    "tags": [
+      "boot",
+      "suede",
+      "bestseller"
+    ],
+    "stockStatus": "low-stock",
+    "isNewArrival": false,
+    "createdAt": "2025-09-30",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 36–41, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-ankle-cognac",
+    "slug": "ankle-boot-cognac-suede",
+    "sku": "HF-231-COG",
+    "name": "The Ankle — Cognac Suede",
+    "category": "boots",
+    "collection": "Heritage Boots",
+    "gender": "women",
+    "description": "A heeled ankle boot in brushed suede with a side zip closure and a 55mm block heel, in a warm cognac colorway.",
+    "color": "Cognac",
+    "colorHex": "#8A4A28",
+    "material": "Brushed suede leather",
+    "sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 216,
+    "images": [
+      {
+        "art": "ankle",
+        "alt": "The Ankle boot in cognac suede, side profile"
+      },
+      {
+        "art": "ankle",
+        "alt": "The Ankle boot in cognac suede, detail of the heel"
+      }
+    ],
+    "tags": [
+      "boot",
+      "suede"
+    ],
+    "stockStatus": "made-to-order",
+    "isNewArrival": false,
+    "createdAt": "2025-09-30",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 36–41, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-strappy-gold",
+    "slug": "strappy-sandal-gold",
+    "sku": "HF-219-GLD",
+    "name": "The Strappy — Gold",
+    "category": "sandals",
+    "collection": "Resort",
+    "gender": "women",
+    "description": "A heeled strappy sandal in metallic leather with a slim ankle strap and a 70mm heel — a resort and summer-line staple.",
+    "color": "Gold",
+    "colorHex": "#C9A24B",
+    "material": "Metallic leather",
+    "sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 160,
+    "images": [
+      {
+        "art": "strappy",
+        "alt": "The Strappy sandal in gold, side profile"
+      },
+      {
+        "art": "strappy",
+        "alt": "The Strappy sandal in gold, detail of the ankle strap"
+      }
+    ],
+    "tags": [
+      "sandal",
+      "summer",
+      "metallic",
+      "bestseller"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": true,
+    "createdAt": "2026-04-10",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 36–41, packed 8 pairs per master carton with barcode labels."
+  },
+  {
+    "id": "p-strappy-silver",
+    "slug": "strappy-sandal-silver",
+    "sku": "HF-219-SLV",
+    "name": "The Strappy — Silver",
+    "category": "sandals",
+    "collection": "Resort",
+    "gender": "women",
+    "description": "A heeled strappy sandal in metallic leather with a slim ankle strap and a 70mm heel, in a cool silver colorway.",
+    "color": "Silver",
+    "colorHex": "#C7C9CE",
+    "material": "Metallic leather",
+    "sizes": [
+      "EU 36",
+      "EU 37",
+      "EU 38",
+      "EU 39",
+      "EU 40",
+      "EU 41"
+    ],
+    "packageSize": 8,
+    "pricePerPackage": 160,
+    "images": [
+      {
+        "art": "strappy",
+        "alt": "The Strappy sandal in silver, side profile"
+      },
+      {
+        "art": "strappy",
+        "alt": "The Strappy sandal in silver, detail of the ankle strap"
+      }
+    ],
+    "tags": [
+      "sandal",
+      "summer",
+      "metallic"
+    ],
+    "stockStatus": "in-stock",
+    "isNewArrival": true,
+    "createdAt": "2026-04-10",
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 36–41, packed 8 pairs per master carton with barcode labels."
+  }
+]
