@@ -19,34 +19,27 @@ export function Header() {
   const hasItems = hasHydrated && state.items.length > 0;
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-[200] bg-cream/70 backdrop-blur-md backdrop-saturate-150 border-b border-ink/10">
-      <div className="absolute left-0 right-0 bottom-[-1px] h-px bg-gradient-to-r from-transparent via-gold to-transparent opacity-50" />
-      <div className="max-w-[1200px] mx-auto px-5 md:px-8 flex items-center justify-between h-14 md:h-[78px]">
-        <Link href="/" className="flex items-center gap-2 font-serif text-xl font-semibold" aria-label="Hervé Footwear home">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
-            <circle cx="15" cy="15" r="14.25" stroke="currentColor" strokeWidth="1" />
-            <path
-              d="M9 19.5c1.5-6 2.2-9.6 6-9.6 2.6 0 3 2.1 5.4 2.1 1.1 0 1.8-.4 2.4-1"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="round"
-            />
-          </svg>
-          <span>
-            Hervé <em className="italic text-gold">Footwear</em>
-          </span>
+    <header className="fixed top-0 left-0 right-0 z-[200] bg-cream/80 backdrop-blur-xl backdrop-saturate-150 border-b border-ink/10">
+      <div className="max-w-[1240px] mx-auto px-5 md:px-8 grid grid-cols-[auto_1fr_auto] items-center gap-4 h-14 md:h-[78px]">
+        <Link href="/" className="flex items-baseline gap-2" aria-label="Hervé Footwear home">
+          <span className="font-serif text-xl md:text-2xl tracking-wide">HERVÉ</span>
+          <span className="hidden sm:inline text-[0.6rem] uppercase tracking-[0.2em] text-ink/40 font-medium">Footwear</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-9" aria-label="Primary">
+        <nav className="hidden md:flex items-center justify-center gap-8" aria-label="Primary">
           <MegaMenu />
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="text-sm font-medium hover:text-gold transition-colors">
+            <Link
+              key={link.href}
+              href={link.href}
+              className="relative text-sm font-medium text-ink/70 hover:text-ink transition-colors py-1 after:absolute after:left-0 after:right-0 after:-bottom-0.5 after:h-px after:bg-accent-3 after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-300 after:origin-left"
+            >
               {link.label}
             </Link>
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center justify-end gap-4">
           <Button href="/catalog" size="sm" className="hidden md:inline-flex">
             Browse Catalog
           </Button>

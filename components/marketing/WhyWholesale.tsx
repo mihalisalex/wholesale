@@ -1,4 +1,5 @@
 import { SectionHead } from "@/components/ui/SectionHead";
+import { GhostMark } from "@/components/ui/GhostMark";
 
 const FEATURES = [
   {
@@ -61,18 +62,24 @@ const FEATURES = [
 
 export function WhyWholesale() {
   return (
-    <section id="why" className="py-20 md:py-28 bg-ink text-cream">
-      <div className="max-w-[1200px] mx-auto px-5 md:px-8">
+    <section id="why" className="relative overflow-hidden py-20 md:py-28 bg-ink text-cream">
+      <GhostMark tone="cream" className="hidden lg:block -bottom-[12%] -left-[3%]" size="clamp(240px, 24vw, 340px)" />
+      <div className="relative max-w-[1200px] mx-auto px-5 md:px-8">
         <SectionHead eyebrow="Why Wholesale With Us" title="Everything a retail buyer actually asks for." light />
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-cream/10 border border-cream/10 rounded-brand overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
           {FEATURES.map((f) => (
-            <div key={f.title} className="bg-ink p-9 hover:bg-[#1D1F2C] transition-colors">
-              <svg viewBox="0 0 40 40" className="w-11 h-11 text-gold-soft mb-5">
-                {f.icon}
-              </svg>
-              <h3 className="font-serif text-lg font-semibold text-cream mb-1.5">{f.title}</h3>
-              <p className="text-sm text-cream/60">{f.description}</p>
+            <div
+              key={f.title}
+              className="bg-white/[0.04] border border-cream/10 rounded-brand p-8 md:p-9 transition-all duration-300 ease-brand hover:-translate-y-1.5 hover:bg-white/[0.07] hover:border-cream/20"
+            >
+              <span className="inline-flex w-14 h-14 rounded-brand-sm bg-cream/10 items-center justify-center mb-6">
+                <svg viewBox="0 0 40 40" className="w-7 h-7 text-accent-3">
+                  {f.icon}
+                </svg>
+              </span>
+              <h3 className="font-serif text-lg font-semibold text-cream mb-2">{f.title}</h3>
+              <p className="text-sm text-cream/60 leading-relaxed">{f.description}</p>
             </div>
           ))}
         </div>

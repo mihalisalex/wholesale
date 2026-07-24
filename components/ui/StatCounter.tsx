@@ -6,9 +6,10 @@ import { useInView } from "framer-motion";
 interface StatCounterProps {
   target: number;
   label: string;
+  dark?: boolean;
 }
 
-export function StatCounter({ target, label }: StatCounterProps) {
+export function StatCounter({ target, label, dark }: StatCounterProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-40px" });
   const [value, setValue] = useState(0);
@@ -31,11 +32,11 @@ export function StatCounter({ target, label }: StatCounterProps) {
 
   return (
     <div ref={ref} className="text-center">
-      <span className="block font-serif text-3xl md:text-4xl text-ink">
+      <span className={`block font-serif text-5xl md:text-6xl lg:text-7xl font-semibold leading-none ${dark ? "text-cream" : "text-ink"}`}>
         {value}
-        <span className="text-gold">+</span>
+        <span className="text-accent-3">+</span>
       </span>
-      <span className="text-[0.82rem] uppercase tracking-wider text-ink/50">{label}</span>
+      <span className={`block mt-3 text-[0.82rem] uppercase tracking-wider ${dark ? "text-cream/55" : "text-ink/50"}`}>{label}</span>
     </div>
   );
 }

@@ -15,6 +15,13 @@ const STOCK_DOT: Record<Product["stockStatus"], string> = {
   "made-to-order": "bg-gold",
 };
 
+function sizeRange(sizes: string[]): string {
+  if (sizes.length === 0) return "";
+  const numeric = sizes.map((s) => ({ raw: s, n: parseInt(s.replace(/[^\d]/g, ""), 10) })).sort((a, b) => a.n - b.n);
+  const prefix = numeric[0].raw.replace(/[\d]+$/, "").trim();
+  return `${prefix} ${numeric[0].n}–${numeric[numeric.length - 1].n}`;
+}
+
 export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
@@ -41,9 +48,13 @@ export function ProductCard({ product }: { product: Product }) {
         />
       </div>
       <div className="p-5">
-        <p className="text-[0.68rem] uppercase tracking-wide text-ink/40 mb-1">{product.collection}</p>
+        <div className="flex items-center justify-between mb-1">
+          <p className="text-[0.68rem] uppercase tracking-wide text-ink/40">{product.collection}</p>
+          <span className="text-[0.6rem] font-bold uppercase tracking-wide text-accent-3">Wholesale</span>
+        </div>
         <h3 className="font-serif text-lg sm:text-base font-semibold mb-1 group-hover:text-gold transition-colors">{product.name}</h3>
-        <p className="text-sm sm:text-xs text-ink/55 mb-3">{product.material}</p>
+        <p className="text-sm sm:text-xs text-ink/55 mb-1">{product.material}</p>
+        <p className="text-[0.7rem] text-ink/45 mb-3">Sizes {sizeRange(product.sizes)}</p>
         <div className="flex items-center justify-between text-sm">
           <span className="flex items-center gap-1.5 text-ink/60">
             <span className={`w-1.5 h-1.5 rounded-full ${STOCK_DOT[product.stockStatus]}`} />
@@ -51,7 +62,7 @@ export function ProductCard({ product }: { product: Product }) {
           </span>
           <span className="font-serif text-lg sm:text-base font-semibold">{formatCurrency(product.pricePerPackage)}</span>
         </div>
-        <p className="text-[0.7rem] text-ink/40 mt-1">per 8-pair package</p>
+        <p className="text-[0.7rem] text-ink/40 mt-1">MOQ: 1 package (8 pairs)</p>
       </div>
     </Link>
   );

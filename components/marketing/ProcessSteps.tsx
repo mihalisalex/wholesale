@@ -14,13 +14,16 @@ export function ProcessSteps() {
     <section id="process" className="py-20 md:py-28">
       <div className="max-w-[1200px] mx-auto px-5 md:px-8">
         <SectionHead eyebrow="How It Works" title="From browsing to Pro Forma, in five steps." />
-        <ol className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
+        <ol className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-x-6 gap-y-12">
+          <div className="hidden md:block absolute top-7 left-[10%] right-[10%] h-px bg-ink/10" aria-hidden="true" />
           {STEPS.map((step, i) => (
             <Reveal key={step.num} delay={i * 0.05}>
-              <li className="pt-6 border-t border-ink/10">
-                <span className="block font-serif italic text-xl text-gold mb-3.5">{step.num}</span>
+              <li className="text-center md:text-left">
+                <span className="relative z-10 mx-auto md:mx-0 mb-5 flex w-14 h-14 items-center justify-center rounded-full bg-white border border-ink/10 shadow-brand font-serif text-lg font-semibold">
+                  {step.num}
+                </span>
                 <h3 className="font-serif text-base font-semibold mb-1.5">{step.title}</h3>
-                <p className="text-sm text-ink/60">{step.description}</p>
+                <p className="text-sm text-ink/60 max-w-[24ch] mx-auto md:mx-0">{step.description}</p>
               </li>
             </Reveal>
           ))}

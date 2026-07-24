@@ -9,10 +9,10 @@ const config: Config = {
         "ink-soft": "#1A1A1D",
         cream: "#F7F7F6",
         "cream-dim": "#ECECEA",
-        gold: "#2E2E31",
-        "gold-soft": "#9B9B9F",
+        gold: "#7A2E3A",
+        "gold-soft": "#C98089",
         "accent-2": "#4B7A63",
-        "accent-3": "#B5493D",
+        "accent-3": "#7A2E3A",
       },
       fontFamily: {
         serif: ["var(--font-playfair)", "Georgia", "serif"],
