@@ -5,7 +5,9 @@ import type { Product } from "@/types/product";
 import { QuantityStepper } from "./QuantityStepper";
 import { StickyMobileAddBar } from "./StickyMobileAddBar";
 import { Button } from "@/components/ui/Button";
+import { PriceLock } from "@/components/ui/PriceLock";
 import { useCart } from "@/hooks/useCart";
+import { useRetailer } from "@/hooks/useRetailer";
 import { formatCurrency, formatPricePerPair, pairsForPackages } from "@/lib/format";
 import { buildProductInquiryMessage, buildWhatsAppLink } from "@/lib/contact";
 
@@ -25,6 +27,7 @@ export function ProductInfo({ product }: { product: Product }) {
   const [quantity, setQuantity] = useState(1);
   const [justAdded, setJustAdded] = useState(false);
   const { addItem } = useCart();
+  const { isLoggedIn } = useRetailer();
 
   const pairs = pairsForPackages(quantity, product.packageSize);
   const total = quantity * product.pricePerPackage;
@@ -112,18 +115,28 @@ export function ProductInfo({ product }: { product: Product }) {
 
       <div className="bg-cream-dim rounded-brand p-6">
         <div className="flex items-baseline justify-between mb-4">
-          <span className="font-serif text-2xl font-semibold">{formatCurrency(product.pricePerPackage)}</span>
-          <span className="text-sm text-ink/50 text-right">
-            / package (8 pairs)
-            <br />
-            {formatPricePerPair(product.pricePerPackage, product.packageSize)}
-          </span>
+          {isLoggedIn ? (
+            <>
+              <span className="font-serif text-2xl font-semibold">{formatCurrency(product.pricePerPackage)}</span>
+              <span className="text-sm text-ink/50 text-right">
+                / package (8 pairs)
+                <br />
+                {formatPricePerPair(product.pricePerPackage, product.packageSize)}
+              </span>
+            </>
+          ) : (
+            <PriceLock />
+          )}
         </div>
 
         <div className="flex items-center justify-between mb-5">
           <QuantityStepper value={quantity} onChange={setQuantity} />
           <div className="text-right text-sm">
-            <p className="font-semibold">{formatCurrency(total)}</p>
+            {isLoggedIn ? (
+              <p className="font-semibold">{formatCurrency(total)}</p>
+            ) : (
+              <PriceLock size="sm" />
+            )}
             <p className="text-ink/50">
               {quantity} pkg · {pairs} pairs
             </p>
@@ -139,6 +152,7 @@ export function ProductInfo({ product }: { product: Product }) {
         quantity={quantity}
         onQuantityChange={setQuantity}
         total={total}
+        showTotal={isLoggedIn}
         justAdded={justAdded}
         onAdd={handleAdd}
       />

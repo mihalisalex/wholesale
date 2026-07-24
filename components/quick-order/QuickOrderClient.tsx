@@ -6,6 +6,8 @@ import type { FilterOptions } from "@/lib/products";
 import { searchProducts } from "@/lib/search";
 import { formatCurrency, formatNumber, formatPricePerPair } from "@/lib/format";
 import { useCart } from "@/hooks/useCart";
+import { useRetailer } from "@/hooks/useRetailer";
+import { PriceLock } from "@/components/ui/PriceLock";
 import { QuantityStepper } from "@/components/product/QuantityStepper";
 import { Button } from "@/components/ui/Button";
 import { ProductThumb } from "@/components/product/ProductThumb";
@@ -35,6 +37,7 @@ export function QuickOrderClient({ products, options }: { products: Product[]; o
   const [isFilterSheetOpen, setFilterSheetOpen] = useState(false);
   const [filters, setFilters] = useState<CatalogFilters>(() => emptyFilters(options));
   const { state, totals, addItem, updateQuantity } = useCart();
+  const { isLoggedIn } = useRetailer();
 
   const activeFilterCount =
     filters.category.length +
@@ -171,10 +174,18 @@ export function QuickOrderClient({ products, options }: { products: Product[]; o
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-serif font-semibold text-sm truncate">{product.name}</p>
-                  <p className="text-xs text-ink/50 truncate">
-                    {product.sku} · {formatCurrency(product.pricePerPackage)}/pkg ·{" "}
-                    {formatPricePerPair(product.pricePerPackage, product.packageSize)}
-                  </p>
+                  {isLoggedIn ? (
+                    <p className="text-xs text-ink/50 truncate">
+                      {product.sku} · {formatCurrency(product.pricePerPackage)}/pkg ·{" "}
+                      {formatPricePerPair(product.pricePerPackage, product.packageSize)}
+                    </p>
+                  ) : (
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-xs text-ink/50 truncate">{product.sku}</p>
+                      <span className="text-xs text-ink/30">·</span>
+                      <PriceLock size="sm" asLink={false} />
+                    </div>
+                  )}
                 </div>
               </button>
               <QuantityStepper size="sm" value={qty} onChange={(next) => setQuantity(product, next)} min={0} />
@@ -194,7 +205,11 @@ export function QuickOrderClient({ products, options }: { products: Product[]; o
               <span className="text-ink/60">
                 {formatNumber(totals.totalPackages)} pkg · {formatNumber(totals.totalPairs)} pairs
               </span>
-              <span className="font-serif text-lg font-semibold">{formatCurrency(totals.grandTotal)}</span>
+              {isLoggedIn ? (
+                <span className="font-serif text-lg font-semibold">{formatCurrency(totals.grandTotal)}</span>
+              ) : (
+                <PriceLock size="sm" />
+              )}
             </div>
             <Button onClick={() => setOrderModalOpen(true)} className="w-full sm:w-auto shrink-0">
               Request Pro Forma Invoice

@@ -1,6 +1,10 @@
+"use client";
+
 import Link from "next/link";
 import { ProductThumb } from "@/components/product/ProductThumb";
+import { PriceLock } from "@/components/ui/PriceLock";
 import { formatCurrency, formatPricePerPair } from "@/lib/format";
+import { useRetailer } from "@/hooks/useRetailer";
 import type { Product } from "@/types/product";
 
 const STOCK_LABEL: Record<Product["stockStatus"], string> = {
@@ -23,6 +27,8 @@ function sizeRange(sizes: string[]): string {
 }
 
 export function ProductCard({ product }: { product: Product }) {
+  const { isLoggedIn } = useRetailer();
+
   return (
     <Link
       href={`/product/${product.slug}`}
@@ -61,10 +67,16 @@ export function ProductCard({ product }: { product: Product }) {
             {STOCK_LABEL[product.stockStatus]}
           </span>
           <span className="text-right">
-            <span className="block font-serif text-lg sm:text-base font-semibold leading-tight">
-              {formatCurrency(product.pricePerPackage)}
-            </span>
-            <span className="block text-[0.68rem] text-ink/45 leading-tight">{formatPricePerPair(product.pricePerPackage, product.packageSize)}</span>
+            {isLoggedIn ? (
+              <>
+                <span className="block font-serif text-lg sm:text-base font-semibold leading-tight">
+                  {formatCurrency(product.pricePerPackage)}
+                </span>
+                <span className="block text-[0.68rem] text-ink/45 leading-tight">{formatPricePerPair(product.pricePerPackage, product.packageSize)}</span>
+              </>
+            ) : (
+              <PriceLock size="sm" asLink={false} />
+            )}
           </span>
         </div>
         <p className="text-[0.7rem] text-ink/40 mt-1">MOQ: 1 package (8 pairs)</p>

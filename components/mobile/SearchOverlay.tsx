@@ -7,6 +7,8 @@ import type { Product } from "@/types/product";
 import { searchProducts } from "@/lib/search";
 import { formatCurrency } from "@/lib/format";
 import { ProductThumb } from "@/components/product/ProductThumb";
+import { PriceLock } from "@/components/ui/PriceLock";
+import { useRetailer } from "@/hooks/useRetailer";
 
 interface SearchOverlayProps {
   isOpen: boolean;
@@ -15,6 +17,7 @@ interface SearchOverlayProps {
 }
 
 export function SearchOverlay({ isOpen, onClose, products }: SearchOverlayProps) {
+  const { isLoggedIn } = useRetailer();
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -96,7 +99,11 @@ export function SearchOverlay({ isOpen, onClose, products }: SearchOverlayProps)
                     <p className="font-serif font-semibold truncate">{product.name}</p>
                     <p className="text-xs text-ink/50">{product.sku} · {product.color}</p>
                   </div>
-                  <p className="text-sm font-semibold shrink-0">{formatCurrency(product.pricePerPackage)}</p>
+                  {isLoggedIn ? (
+                    <p className="text-sm font-semibold shrink-0">{formatCurrency(product.pricePerPackage)}</p>
+                  ) : (
+                    <PriceLock size="sm" className="shrink-0" asLink={false} />
+                  )}
                 </Link>
               ))}
             </div>

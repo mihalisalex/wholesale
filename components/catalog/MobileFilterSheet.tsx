@@ -2,6 +2,8 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import type { FilterOptions } from "@/lib/products";
+import { useRetailer } from "@/hooks/useRetailer";
+import { PriceLock } from "@/components/ui/PriceLock";
 import { formatCurrency } from "@/lib/format";
 import type { CatalogFilters } from "./FilterSidebar";
 
@@ -20,6 +22,8 @@ function toggleValue(list: string[], value: string): string[] {
 }
 
 export function MobileFilterSheet({ isOpen, onClose, options, filters, onChange, onReset, resultCount }: MobileFilterSheetProps) {
+  const { isLoggedIn } = useRetailer();
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -162,32 +166,39 @@ export function MobileFilterSheet({ isOpen, onClose, options, filters, onChange,
               New Arrivals Only
             </label>
 
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-ink/50 mb-3">
-                Price {formatCurrency(filters.minPrice)} – {formatCurrency(filters.maxPrice)}
-              </p>
-              <div className="flex items-center gap-3">
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  min={options.priceRange.min}
-                  max={filters.maxPrice}
-                  value={filters.minPrice}
-                  onChange={(e) => onChange({ ...filters, minPrice: Number(e.target.value) })}
-                  className="w-full rounded-brand-sm border border-ink/15 px-3 py-3 text-base"
-                />
-                <span className="text-ink/40">–</span>
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  min={filters.minPrice}
-                  max={options.priceRange.max}
-                  value={filters.maxPrice}
-                  onChange={(e) => onChange({ ...filters, maxPrice: Number(e.target.value) })}
-                  className="w-full rounded-brand-sm border border-ink/15 px-3 py-3 text-base"
-                />
+            {isLoggedIn ? (
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-ink/50 mb-3">
+                  Price {formatCurrency(filters.minPrice)} – {formatCurrency(filters.maxPrice)}
+                </p>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    min={options.priceRange.min}
+                    max={filters.maxPrice}
+                    value={filters.minPrice}
+                    onChange={(e) => onChange({ ...filters, minPrice: Number(e.target.value) })}
+                    className="w-full rounded-brand-sm border border-ink/15 px-3 py-3 text-base"
+                  />
+                  <span className="text-ink/40">–</span>
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    min={filters.minPrice}
+                    max={options.priceRange.max}
+                    value={filters.maxPrice}
+                    onChange={(e) => onChange({ ...filters, maxPrice: Number(e.target.value) })}
+                    className="w-full rounded-brand-sm border border-ink/15 px-3 py-3 text-base"
+                  />
+                </div>
               </div>
-            </div>
+            ) : (
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wide text-ink/50 mb-2">Price</p>
+                <PriceLock size="sm" />
+              </div>
+            )}
           </div>
 
           <div className="shrink-0 border-t border-ink/10 px-5 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] flex gap-3 bg-cream">

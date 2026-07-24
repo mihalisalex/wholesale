@@ -1,6 +1,8 @@
 "use client";
 
 import type { FilterOptions } from "@/lib/products";
+import { useRetailer } from "@/hooks/useRetailer";
+import { PriceLock } from "@/components/ui/PriceLock";
 import { formatCurrency } from "@/lib/format";
 
 export interface CatalogFilters {
@@ -27,6 +29,8 @@ function toggleValue(list: string[], value: string): string[] {
 }
 
 export function FilterSidebar({ options, filters, onChange, onReset }: FilterSidebarProps) {
+  const { isLoggedIn } = useRetailer();
+
   return (
     <aside className="w-full lg:w-64 shrink-0 space-y-8">
       <div className="flex items-center justify-between">
@@ -154,30 +158,37 @@ export function FilterSidebar({ options, filters, onChange, onReset }: FilterSid
         </label>
       </div>
 
-      <div>
-        <p className="text-xs font-semibold uppercase tracking-wide text-ink/50 mb-3">
-          Price {formatCurrency(filters.minPrice)} – {formatCurrency(filters.maxPrice)}
-        </p>
-        <div className="flex items-center gap-3">
-          <input
-            type="number"
-            min={options.priceRange.min}
-            max={filters.maxPrice}
-            value={filters.minPrice}
-            onChange={(e) => onChange({ ...filters, minPrice: Number(e.target.value) })}
-            className="w-full rounded-brand-sm border border-ink/15 px-2 py-1.5 text-sm"
-          />
-          <span className="text-ink/40">–</span>
-          <input
-            type="number"
-            min={filters.minPrice}
-            max={options.priceRange.max}
-            value={filters.maxPrice}
-            onChange={(e) => onChange({ ...filters, maxPrice: Number(e.target.value) })}
-            className="w-full rounded-brand-sm border border-ink/15 px-2 py-1.5 text-sm"
-          />
+      {isLoggedIn ? (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-ink/50 mb-3">
+            Price {formatCurrency(filters.minPrice)} – {formatCurrency(filters.maxPrice)}
+          </p>
+          <div className="flex items-center gap-3">
+            <input
+              type="number"
+              min={options.priceRange.min}
+              max={filters.maxPrice}
+              value={filters.minPrice}
+              onChange={(e) => onChange({ ...filters, minPrice: Number(e.target.value) })}
+              className="w-full rounded-brand-sm border border-ink/15 px-2 py-1.5 text-sm"
+            />
+            <span className="text-ink/40">–</span>
+            <input
+              type="number"
+              min={filters.minPrice}
+              max={options.priceRange.max}
+              value={filters.maxPrice}
+              onChange={(e) => onChange({ ...filters, maxPrice: Number(e.target.value) })}
+              className="w-full rounded-brand-sm border border-ink/15 px-2 py-1.5 text-sm"
+            />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-ink/50 mb-2">Price</p>
+          <PriceLock size="sm" />
+        </div>
+      )}
     </aside>
   );
 }

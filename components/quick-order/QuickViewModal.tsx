@@ -4,6 +4,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Product } from "@/types/product";
 import { ProductThumb } from "@/components/product/ProductThumb";
 import { QuantityStepper } from "@/components/product/QuantityStepper";
+import { PriceLock } from "@/components/ui/PriceLock";
+import { useRetailer } from "@/hooks/useRetailer";
 import { formatCurrency, formatPricePerPair } from "@/lib/format";
 
 interface QuickViewModalProps {
@@ -14,6 +16,8 @@ interface QuickViewModalProps {
 }
 
 export function QuickViewModal({ product, quantity, onQuantityChange, onClose }: QuickViewModalProps) {
+  const { isLoggedIn } = useRetailer();
+
   return (
     <AnimatePresence>
       {product && (
@@ -69,10 +73,16 @@ export function QuickViewModal({ product, quantity, onQuantityChange, onClose }:
 
                 <div className="flex items-center justify-between bg-cream-dim rounded-brand-sm p-4">
                   <div>
-                    <p className="font-serif text-lg font-semibold">{formatCurrency(product.pricePerPackage)}</p>
-                    <p className="text-xs text-ink/50">
-                      / package ({product.packageSize} pairs) · {formatPricePerPair(product.pricePerPackage, product.packageSize)}
-                    </p>
+                    {isLoggedIn ? (
+                      <>
+                        <p className="font-serif text-lg font-semibold">{formatCurrency(product.pricePerPackage)}</p>
+                        <p className="text-xs text-ink/50">
+                          / package ({product.packageSize} pairs) · {formatPricePerPair(product.pricePerPackage, product.packageSize)}
+                        </p>
+                      </>
+                    ) : (
+                      <PriceLock />
+                    )}
                   </div>
                   <QuantityStepper value={quantity} onChange={onQuantityChange} min={0} />
                 </div>

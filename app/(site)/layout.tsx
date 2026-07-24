@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
+import { RetailerProvider } from "@/context/RetailerContext";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartRoot } from "@/components/cart/CartRoot";
@@ -56,18 +57,20 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         />
       </head>
       <body className="font-sans">
-        <CartProvider>
-          <Header retailer={retailer ? { companyName: retailer.companyName } : null} />
-          <div className="pt-14 md:pt-[78px]">
-            {children}
-            <Footer />
-          </div>
-          <div className="pb-20 md:hidden" aria-hidden="true" />
-          <CartRoot />
-          <MobileChrome products={products} />
-          <CookieConsent />
-          <Analytics />
-        </CartProvider>
+        <RetailerProvider retailer={retailer ? { companyName: retailer.companyName } : null}>
+          <CartProvider>
+            <Header retailer={retailer ? { companyName: retailer.companyName } : null} />
+            <div className="pt-14 md:pt-[78px]">
+              {children}
+              <Footer />
+            </div>
+            <div className="pb-20 md:hidden" aria-hidden="true" />
+            <CartRoot />
+            <MobileChrome products={products} />
+            <CookieConsent />
+            <Analytics />
+          </CartProvider>
+        </RetailerProvider>
       </body>
     </html>
   );

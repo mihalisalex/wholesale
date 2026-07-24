@@ -1,12 +1,15 @@
 "use client";
 
 import { ProductThumb } from "@/components/product/ProductThumb";
+import { PriceLock } from "@/components/ui/PriceLock";
 import { formatCurrency, pairsForPackages } from "@/lib/format";
 import { useCart } from "@/hooks/useCart";
+import { useRetailer } from "@/hooks/useRetailer";
 import type { CartItem } from "@/types/cart";
 
 export function CartLineItem({ item }: { item: CartItem }) {
   const { updateQuantity, removeItem } = useCart();
+  const { isLoggedIn } = useRetailer();
   const pairs = pairsForPackages(item.quantityPackages, item.packageSize);
   const subtotal = item.quantityPackages * item.pricePerPackage;
 
@@ -60,7 +63,11 @@ export function CartLineItem({ item }: { item: CartItem }) {
             </button>
           </div>
           <div className="text-right">
-            <p className="text-sm font-semibold text-ink">{formatCurrency(subtotal)}</p>
+            {isLoggedIn ? (
+              <p className="text-sm font-semibold text-ink">{formatCurrency(subtotal)}</p>
+            ) : (
+              <PriceLock size="sm" />
+            )}
             <p className="text-xs text-ink/45">
               {item.quantityPackages} pkg · {pairs} pairs
             </p>

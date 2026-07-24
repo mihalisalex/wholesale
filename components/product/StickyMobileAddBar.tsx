@@ -7,11 +7,12 @@ interface StickyMobileAddBarProps {
   quantity: number;
   onQuantityChange: (value: number) => void;
   total: number;
+  showTotal?: boolean;
   justAdded: boolean;
   onAdd: () => void;
 }
 
-export function StickyMobileAddBar({ quantity, onQuantityChange, total, justAdded, onAdd }: StickyMobileAddBarProps) {
+export function StickyMobileAddBar({ quantity, onQuantityChange, total, showTotal = true, justAdded, onAdd }: StickyMobileAddBarProps) {
   return (
     <div
       className="md:hidden fixed left-0 right-0 bottom-16 z-30 bg-cream/95 backdrop-blur-md border-t border-ink/10 px-4 py-3 flex items-center gap-3"
@@ -23,7 +24,7 @@ export function StickyMobileAddBar({ quantity, onQuantityChange, total, justAdde
         onClick={onAdd}
         className="flex-1 rounded-full bg-ink text-cream font-semibold py-3.5 flex items-center justify-center gap-2 active:scale-[0.98] transition-transform"
       >
-        {justAdded ? "Added ✓" : `Add Package · ${formatCurrency(total)}`}
+        {justAdded ? "Added ✓" : showTotal ? `Add Package · ${formatCurrency(total)}` : "Add Package"}
       </button>
     </div>
   );

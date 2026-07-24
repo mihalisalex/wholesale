@@ -8,6 +8,7 @@ import { FilterSidebar, type CatalogFilters } from "./FilterSidebar";
 import { MobileFilterSheet } from "./MobileFilterSheet";
 import { ProductCard } from "./ProductCard";
 import { searchProducts } from "@/lib/search";
+import { useRetailer } from "@/hooks/useRetailer";
 
 type SortKey = "newest" | "price-asc" | "price-desc" | "alphabetical";
 
@@ -24,6 +25,7 @@ function readList(params: URLSearchParams, key: string): string[] {
 export function CatalogClient({ products, options }: CatalogClientProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { isLoggedIn } = useRetailer();
 
   const [isMobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
@@ -169,8 +171,8 @@ export function CatalogClient({ products, options }: CatalogClientProps) {
               className="rounded-full border border-ink/15 bg-white px-3.5 py-2.5 text-sm"
             >
               <option value="newest">Newest</option>
-              <option value="price-asc">Price: Low to High</option>
-              <option value="price-desc">Price: High to Low</option>
+              {isLoggedIn && <option value="price-asc">Price: Low to High</option>}
+              {isLoggedIn && <option value="price-desc">Price: High to Low</option>}
               <option value="alphabetical">Alphabetical</option>
             </select>
           </div>

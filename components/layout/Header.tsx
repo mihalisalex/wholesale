@@ -54,7 +54,18 @@ export function Header({ retailer }: HeaderProps) {
             Browse Catalog
           </Button>
 
-          {/* Mobile: primary nav lives in the sticky BottomNav, so the header is just logo + cart. */}
+          {/* Mobile: primary nav lives in the sticky BottomNav, so the header is just logo + account + cart. */}
+          <Link
+            href={retailer ? "/account" : "/login"}
+            aria-label={retailer ? "My account" : "Log in"}
+            className="md:hidden relative w-10 h-10 flex items-center justify-center"
+          >
+            <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.7">
+              <circle cx="12" cy="8" r="3.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M4.5 20a7.5 7.5 0 0 1 15 0" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+
           <button
             type="button"
             onClick={openDrawer}

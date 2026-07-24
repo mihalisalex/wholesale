@@ -1,10 +1,12 @@
 "use client";
 
 import { useCart } from "@/hooks/useCart";
+import { useRetailer } from "@/hooks/useRetailer";
 import { formatCurrency, formatNumber } from "@/lib/format";
 
 export function CartButton() {
   const { totals, openDrawer, hasHydrated, state } = useCart();
+  const { isLoggedIn } = useRetailer();
   const isEmpty = !hasHydrated || state.items.length === 0;
 
   return (
@@ -30,7 +32,7 @@ export function CartButton() {
         <span className="text-sm font-semibold">Cart</span>
       ) : (
         <span className="text-left leading-tight">
-          <span className="block text-sm font-semibold">{formatCurrency(totals.grandTotal)}</span>
+          {isLoggedIn && <span className="block text-sm font-semibold">{formatCurrency(totals.grandTotal)}</span>}
           <span className="block text-[11px] text-cream/60">
             {formatNumber(totals.totalPackages)} pkg · {formatNumber(totals.totalPairs)} pairs
           </span>
