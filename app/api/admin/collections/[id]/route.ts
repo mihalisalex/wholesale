@@ -16,7 +16,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
   const collection: Collection = { ...data, id };
   try {
-    const updated = updateCollection(id, collection);
+    const updated = await updateCollection(id, collection);
     return Response.json({ success: true, collection: updated });
   } catch (err) {
     return Response.json(
@@ -32,7 +32,7 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
 
   const { id } = await params;
   try {
-    deleteCollection(id);
+    await deleteCollection(id);
     return Response.json({ success: true, message: "Collection deleted." });
   } catch (err) {
     return Response.json(

@@ -4,7 +4,7 @@ import { useMemo, useState } from "react";
 import type { Product } from "@/types/product";
 import type { FilterOptions } from "@/lib/products";
 import { searchProducts } from "@/lib/search";
-import { formatCurrency, formatNumber } from "@/lib/format";
+import { formatCurrency, formatNumber, formatPricePerPair } from "@/lib/format";
 import { useCart } from "@/hooks/useCart";
 import { QuantityStepper } from "@/components/product/QuantityStepper";
 import { Button } from "@/components/ui/Button";
@@ -172,7 +172,8 @@ export function QuickOrderClient({ products, options }: { products: Product[]; o
                 <div className="flex-1 min-w-0">
                   <p className="font-serif font-semibold text-sm truncate">{product.name}</p>
                   <p className="text-xs text-ink/50 truncate">
-                    {product.sku} · {formatCurrency(product.pricePerPackage)}/pkg
+                    {product.sku} · {formatCurrency(product.pricePerPackage)}/pkg ·{" "}
+                    {formatPricePerPair(product.pricePerPackage, product.packageSize)}
                   </p>
                 </div>
               </button>

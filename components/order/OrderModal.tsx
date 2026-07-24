@@ -1,6 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCart } from "@/hooks/useCart";
 import { OrderForm } from "./OrderForm";
@@ -11,7 +12,11 @@ import type { OrderRequestPayload, OrderRequestResponse } from "@/types/order";
 import { siteConfig } from "@/config/site.config";
 import { pairsForPackages } from "@/lib/format";
 
-type Step = "form" | "review" | "confirmed";
+type Step = "loading" | "auth-required" | "form" | "review" | "confirmed";
+
+interface AccountInfo extends CustomerFormValues {
+  profileComplete: boolean;
+}
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -47,12 +52,33 @@ export function OrderModal({ isOpen, onClose }: OrderModalProps) {
  */
 function OrderModalContent({ onClose }: { onClose: () => void }) {
   const { state, totals, clearCart } = useCart();
-  const [step, setStep] = useState<Step>("form");
+  const [step, setStep] = useState<Step>("loading");
   const [customer, setCustomer] = useState<CustomerFormValues | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [result, setResult] = useState<OrderRequestResponse | null>(null);
   const [formRenderedAt] = useState(() => Date.now());
   const honeypotRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/account/me")
+      .then((res) => res.json())
+      .then((data: { retailer: AccountInfo | null }) => {
+        if (cancelled) return;
+        if (!data.retailer) {
+          setStep("auth-required");
+          return;
+        }
+        setCustomer(data.retailer);
+        setStep(data.retailer.profileComplete ? "review" : "form");
+      })
+      .catch(() => {
+        if (!cancelled) setStep("auth-required");
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   async function handleConfirm(paymentTerms: string) {
     if (!customer) return;
@@ -101,6 +127,31 @@ function OrderModalContent({ onClose }: { onClose: () => void }) {
     }
   }
 
+  async function handleFormSubmit(values: CustomerFormValues) {
+    setCustomer(values);
+    // Persist whatever we just collected to the account, so next time this
+    // skips straight to the confirm step.
+    try {
+      await fetch("/api/account/profile", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          companyName: values.companyName,
+          vatNumber: values.vatNumber,
+          contactName: values.contactName,
+          phone: values.phone,
+          country: values.country,
+          city: values.city,
+          shippingAddress: values.shippingAddress,
+          preferredShipping: values.preferredShipping,
+        }),
+      });
+    } catch {
+      // Non-fatal — the order can still proceed even if saving the profile fails.
+    }
+    setStep("review");
+  }
+
   return (
     <motion.div
       role="dialog"
@@ -121,8 +172,10 @@ function OrderModalContent({ onClose }: { onClose: () => void }) {
       >
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-serif text-xl font-semibold">
-            {step === "form" && "Request a Pro Forma Invoice"}
-            {step === "review" && "Review Your Order"}
+            {step === "loading" && "Request a Pro Forma Invoice"}
+            {step === "auth-required" && "Log In to Order"}
+            {step === "form" && "A Few Details First"}
+            {step === "review" && "Confirm & Send"}
             {step === "confirmed" && "Order Request"}
           </h2>
           <button
@@ -146,15 +199,35 @@ function OrderModalContent({ onClose }: { onClose: () => void }) {
           aria-hidden="true"
         />
 
+        {step === "loading" && <p className="text-sm text-ink/50 py-10 text-center">One moment…</p>}
+
+        {step === "auth-required" && (
+          <div className="text-center py-6">
+            <p className="text-ink/60 mb-6">
+              Requesting a Pro Forma Invoice requires a retailer account — it&rsquo;s free, and once your details are
+              saved, every order after this is a single confirm.
+            </p>
+            <div className="flex gap-3 justify-center">
+              <Link
+                href="/login?next=/quick-order"
+                onClick={onClose}
+                className="inline-flex items-center justify-center rounded-full border border-ink px-6 py-3 text-sm font-semibold"
+              >
+                Log In
+              </Link>
+              <Link
+                href="/register"
+                onClick={onClose}
+                className="inline-flex items-center justify-center rounded-full bg-ink text-cream px-6 py-3 text-sm font-semibold"
+              >
+                Create Account
+              </Link>
+            </div>
+          </div>
+        )}
+
         {step === "form" && (
-          <OrderForm
-            defaultValues={customer ?? undefined}
-            onCancel={onClose}
-            onSubmit={(values) => {
-              setCustomer(values);
-              setStep("review");
-            }}
-          />
+          <OrderForm defaultValues={customer ?? undefined} onCancel={onClose} onSubmit={handleFormSubmit} />
         )}
 
         {step === "review" && customer && (

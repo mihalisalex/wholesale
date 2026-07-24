@@ -1,6 +1,5 @@
 [
   {
-    "id": "p-oxford-black",
     "slug": "oxford-cap-toe-black",
     "sku": "HF-104-BLK",
     "name": "The Oxford — Black",
@@ -25,8 +24,8 @@
     "images": [
       {
         "art": "oxford",
-        "alt": "The Oxford — Black, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1777987601426-c05a82045862"
+        "alt": "The Oxford — Black in Black, product photo",
+        "photoUrl": "/images/products/oxford.jpg"
       }
     ],
     "tags": [
@@ -38,7 +37,8 @@
     "stockStatus": "in-stock",
     "isNewArrival": false,
     "createdAt": "2025-11-02",
-    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–46, packed 8 pairs per master carton with barcode labels."
+    "packagingInfo": "Individually boxed pairs in assorted EU sizes 40–46, packed 8 pairs per master carton with barcode labels.",
+    "id": "p-oxford-black"
   },
   {
     "id": "p-oxford-tan",
@@ -67,7 +67,7 @@
       {
         "art": "oxford",
         "alt": "The Oxford — Tan, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1777987601426-c05a82045862"
+        "photoUrl": "/images/products/oxford.jpg"
       }
     ],
     "tags": [
@@ -106,7 +106,7 @@
       {
         "art": "chelsea",
         "alt": "The Chelsea — Black, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1534233812932-59b8fa1b780c"
+        "photoUrl": "/images/products/chelsea-black.jpg"
       }
     ],
     "tags": [
@@ -145,7 +145,7 @@
       {
         "art": "chelsea",
         "alt": "The Chelsea — Brown, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1777987601677-3059be0e1388"
+        "photoUrl": "/images/products/chelsea-brown.jpg"
       }
     ],
     "tags": [
@@ -183,7 +183,7 @@
       {
         "art": "penny",
         "alt": "The Penny — Saddle Tan, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1777987601447-266e128de448"
+        "photoUrl": "/images/products/penny-saddle-tan.jpg"
       }
     ],
     "tags": [
@@ -222,7 +222,7 @@
       {
         "art": "penny",
         "alt": "The Penny — Black, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1570800493677-12a7ad3d4d86"
+        "photoUrl": "/images/products/penny-black.jpg"
       }
     ],
     "tags": [
@@ -262,7 +262,7 @@
       {
         "art": "court",
         "alt": "The Court — White, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1561282109-3a8f490997cc"
+        "photoUrl": "/images/products/court.jpg"
       }
     ],
     "tags": [
@@ -303,7 +303,7 @@
       {
         "art": "court",
         "alt": "The Court — Navy, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1561282109-3a8f490997cc"
+        "photoUrl": "/images/products/court.jpg"
       }
     ],
     "tags": [
@@ -342,7 +342,7 @@
       {
         "art": "stiletto",
         "alt": "The Stiletto — Black, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1618274158630-bc47a614b3a5"
+        "photoUrl": "/images/products/stiletto-black.jpg"
       }
     ],
     "tags": [
@@ -382,7 +382,7 @@
       {
         "art": "stiletto",
         "alt": "The Stiletto — Nude, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95"
+        "photoUrl": "/images/products/stiletto-nude.jpg"
       }
     ],
     "tags": [
@@ -421,7 +421,7 @@
       {
         "art": "ballet",
         "alt": "The Ballet — Black, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1712512343634-f64161d3daa6"
+        "photoUrl": "/images/products/ballet.jpg"
       }
     ],
     "tags": [
@@ -461,7 +461,7 @@
       {
         "art": "ballet",
         "alt": "The Ballet — Blush, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1712512343634-f64161d3daa6"
+        "photoUrl": "/images/products/ballet.jpg"
       }
     ],
     "tags": [
@@ -500,7 +500,7 @@
       {
         "art": "ankle",
         "alt": "The Ankle — Black Suede, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1763661300203-aa3e2702f510"
+        "photoUrl": "/images/products/ankle-black-suede.jpg"
       }
     ],
     "tags": [
@@ -539,7 +539,7 @@
       {
         "art": "ankle",
         "alt": "The Ankle — Cognac Suede, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1632690642793-a270624dd20d"
+        "photoUrl": "/images/products/ankle-cognac-suede.jpg"
       }
     ],
     "tags": [
@@ -577,7 +577,7 @@
       {
         "art": "strappy",
         "alt": "The Strappy — Gold, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1784821926276-401342334349"
+        "photoUrl": "/images/products/strappy-gold.jpg"
       }
     ],
     "tags": [
@@ -617,7 +617,7 @@
       {
         "art": "strappy",
         "alt": "The Strappy — Silver, product photo",
-        "photoUrl": "https://images.unsplash.com/photo-1637538074119-f41d50e51fd4"
+        "photoUrl": "/images/products/strappy-silver.jpg"
       }
     ],
     "tags": [

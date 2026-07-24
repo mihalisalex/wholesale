@@ -1,41 +1,33 @@
-import { readJsonFile, writeJsonFile } from "@/lib/admin/data-store";
+import { eq, ne, or, and } from "drizzle-orm";
+import { db } from "@/lib/db/client";
+import { products } from "@/lib/db/schema";
 import type { Product, ProductCategory } from "@/types/product";
 
-const PRODUCTS_FILE = "products.json";
-
-/**
- * Server-only. Reads straight from disk on every call (no in-memory cache)
- * so admin edits made through `/admin/products` show up on the public site
- * immediately, without a restart or rebuild.
- */
-function loadProducts(): Product[] {
-  return readJsonFile<Product[]>(PRODUCTS_FILE);
+export async function getAllProducts(): Promise<Product[]> {
+  return db.select().from(products) as Promise<Product[]>;
 }
 
-function saveProducts(products: Product[]): void {
-  writeJsonFile(PRODUCTS_FILE, products);
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
+  const rows = (await db.select().from(products).where(eq(products.slug, slug))) as Product[];
+  return rows[0];
 }
 
-export function getAllProducts(): Product[] {
-  return loadProducts();
+export async function getProductBySku(sku: string): Promise<Product | undefined> {
+  const rows = (await db.select().from(products).where(eq(products.sku, sku))) as Product[];
+  return rows[0];
 }
 
-export function getProductBySlug(slug: string): Product | undefined {
-  return loadProducts().find((p) => p.slug === slug);
+export async function getProductById(id: string): Promise<Product | undefined> {
+  const rows = (await db.select().from(products).where(eq(products.id, id))) as Product[];
+  return rows[0];
 }
 
-export function getProductBySku(sku: string): Product | undefined {
-  return loadProducts().find((p) => p.sku === sku);
-}
-
-export function getProductById(id: string): Product | undefined {
-  return loadProducts().find((p) => p.id === id);
-}
-
-export function getRelatedProducts(product: Product, limit = 4): Product[] {
-  return loadProducts()
-    .filter((p) => p.id !== product.id && (p.category === product.category || p.collection === product.collection))
-    .slice(0, limit);
+export async function getRelatedProducts(product: Product, limit = 4): Promise<Product[]> {
+  const rows = (await db
+    .select()
+    .from(products)
+    .where(and(ne(products.id, product.id), or(eq(products.category, product.category), eq(products.collection, product.collection))))) as Product[];
+  return rows.slice(0, limit);
 }
 
 export interface FilterOptions {
@@ -47,15 +39,15 @@ export interface FilterOptions {
   priceRange: { min: number; max: number };
 }
 
-export function getFilterOptions(): FilterOptions {
-  const products = loadProducts();
-  const categories = Array.from(new Set(products.map((p) => p.category)));
+export async function getFilterOptions(): Promise<FilterOptions> {
+  const all = await getAllProducts();
+  const categories = Array.from(new Set(all.map((p) => p.category)));
   const colorMap = new Map<string, string>();
-  products.forEach((p) => colorMap.set(p.color, p.colorHex));
-  const materials = Array.from(new Set(products.map((p) => p.material)));
-  const sizes = Array.from(new Set(products.flatMap((p) => p.sizes))).sort();
-  const collections = Array.from(new Set(products.map((p) => p.collection)));
-  const prices = products.length ? products.map((p) => p.pricePerPackage) : [0];
+  all.forEach((p) => colorMap.set(p.color, p.colorHex));
+  const materials = Array.from(new Set(all.map((p) => p.material)));
+  const sizes = Array.from(new Set(all.flatMap((p) => p.sizes))).sort();
+  const collections = Array.from(new Set(all.map((p) => p.collection)));
+  const prices = all.length ? all.map((p) => p.pricePerPackage) : [0];
 
   return {
     categories,
@@ -69,43 +61,35 @@ export function getFilterOptions(): FilterOptions {
 
 // ---- Admin write operations ----
 
-export function createProduct(product: Product): Product {
-  const products = loadProducts();
-  if (products.some((p) => p.slug === product.slug)) {
+export async function createProduct(product: Product): Promise<Product> {
+  const existing = await db.select().from(products).where(or(eq(products.slug, product.slug), eq(products.sku, product.sku)));
+  if (existing.some((p) => p.slug === product.slug)) {
     throw new Error(`A product with slug "${product.slug}" already exists.`);
   }
-  if (products.some((p) => p.sku === product.sku)) {
+  if (existing.some((p) => p.sku === product.sku)) {
     throw new Error(`A product with SKU "${product.sku}" already exists.`);
   }
-  products.push(product);
-  saveProducts(products);
+  await db.insert(products).values(product);
   return product;
 }
 
-export function updateProduct(id: string, updates: Product): Product {
-  const products = loadProducts();
-  const index = products.findIndex((p) => p.id === id);
-  if (index === -1) {
-    throw new Error(`Product with id "${id}" not found.`);
-  }
-  const duplicateSlug = products.some((p) => p.id !== id && p.slug === updates.slug);
-  if (duplicateSlug) {
+export async function updateProduct(id: string, updates: Product): Promise<Product> {
+  const existing = await db.select().from(products).where(eq(products.slug, updates.slug));
+  if (existing.some((p) => p.id !== id && p.slug === updates.slug)) {
     throw new Error(`A product with slug "${updates.slug}" already exists.`);
   }
-  const duplicateSku = products.some((p) => p.id !== id && p.sku === updates.sku);
-  if (duplicateSku) {
+  const existingSku = await db.select().from(products).where(eq(products.sku, updates.sku));
+  if (existingSku.some((p) => p.id !== id && p.sku === updates.sku)) {
     throw new Error(`A product with SKU "${updates.sku}" already exists.`);
   }
-  products[index] = { ...updates, id };
-  saveProducts(products);
-  return products[index];
+  const next = { ...updates, id };
+  await db.update(products).set(next).where(eq(products.id, id));
+  return next;
 }
 
-export function deleteProduct(id: string): void {
-  const products = loadProducts();
-  const next = products.filter((p) => p.id !== id);
-  if (next.length === products.length) {
+export async function deleteProduct(id: string): Promise<void> {
+  const deleted = await db.delete(products).where(eq(products.id, id)).returning({ id: products.id });
+  if (deleted.length === 0) {
     throw new Error(`Product with id "${id}" not found.`);
   }
-  saveProducts(next);
 }

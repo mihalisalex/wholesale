@@ -171,7 +171,11 @@ export function ProFormaDocument({ invoiceNumber, date, customer, items, totals,
               <Text style={styles.colQty}>
                 {item.quantityPackages} / {item.pairs}
               </Text>
-              <Text style={styles.colPrice}>{formatMoney(item.pricePerPackage, currency)}</Text>
+              <Text style={styles.colPrice}>
+                {formatMoney(item.pricePerPackage, currency)}
+                {"\n"}
+                <Text style={{ fontSize: 6.5, color: MUTED }}>{formatMoney(item.pricePerPackage / item.packageSize, currency)}/pr</Text>
+              </Text>
               <Text style={styles.colSubtotal}>{formatMoney(item.subtotal, currency)}</Text>
             </View>
           ))}

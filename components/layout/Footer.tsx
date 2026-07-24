@@ -13,8 +13,8 @@ export function Footer() {
             <span className="text-[0.6rem] uppercase tracking-[0.2em] text-cream/40 font-medium">Footwear</span>
           </Link>
           <p className="text-sm mt-4 max-w-[32ch] leading-relaxed">
-            Wholesale footwear for independent boutiques and retail chains — browse the catalog and request a Pro Forma
-            Invoice, no account required.
+            Wholesale footwear for independent boutiques and retail chains — create a free retailer account and
+            request a Pro Forma Invoice in minutes.
           </p>
         </div>
 
@@ -35,6 +35,12 @@ export function Footer() {
             </Link>
             <Link href="/#testimonials" className="hover:text-cream transition-colors">
               Retailers
+            </Link>
+            <Link href="/login" className="hover:text-cream transition-colors">
+              Log In
+            </Link>
+            <Link href="/register" className="hover:text-cream transition-colors">
+              Create Account
             </Link>
           </nav>
         </div>
@@ -61,10 +67,21 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="max-w-[1240px] mx-auto px-5 md:px-8 flex flex-col md:flex-row justify-between gap-2 py-7 text-xs text-cream/50">
+      <div className="max-w-[1240px] mx-auto px-5 md:px-8 flex flex-col md:flex-row justify-between gap-3 py-7 text-xs text-cream/50">
         <p>
           © {new Date().getFullYear()} {siteConfig.company.name}. All rights reserved.
         </p>
+        <nav className="flex gap-4">
+          <Link href="/terms" className="hover:text-cream/80 transition-colors">
+            Terms
+          </Link>
+          <Link href="/privacy" className="hover:text-cream/80 transition-colors">
+            Privacy
+          </Link>
+          <Link href="/cookies" className="hover:text-cream/80 transition-colors">
+            Cookies
+          </Link>
+        </nav>
         <p>Wholesale only — quotation requests, not an online store.</p>
       </div>
     </footer>

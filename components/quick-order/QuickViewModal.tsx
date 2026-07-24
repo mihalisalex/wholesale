@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Product } from "@/types/product";
 import { ProductThumb } from "@/components/product/ProductThumb";
 import { QuantityStepper } from "@/components/product/QuantityStepper";
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, formatPricePerPair } from "@/lib/format";
 
 interface QuickViewModalProps {
   product: Product | null;
@@ -70,7 +70,9 @@ export function QuickViewModal({ product, quantity, onQuantityChange, onClose }:
                 <div className="flex items-center justify-between bg-cream-dim rounded-brand-sm p-4">
                   <div>
                     <p className="font-serif text-lg font-semibold">{formatCurrency(product.pricePerPackage)}</p>
-                    <p className="text-xs text-ink/50">/ package ({product.packageSize} pairs)</p>
+                    <p className="text-xs text-ink/50">
+                      / package ({product.packageSize} pairs) · {formatPricePerPair(product.pricePerPackage, product.packageSize)}
+                    </p>
                   </div>
                   <QuantityStepper value={quantity} onChange={onQuantityChange} min={0} />
                 </div>

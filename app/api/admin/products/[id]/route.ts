@@ -11,7 +11,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
   if (unauthorized) return unauthorized;
 
   const { id } = await params;
-  const product = getProductById(id);
+  const product = await getProductById(id);
   if (!product) return Response.json({ success: false, message: "Product not found." }, { status: 404 });
   return Response.json({ success: true, product });
 }
@@ -26,7 +26,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
 
   const product: Product = { ...data, id };
   try {
-    const updated = updateProduct(id, product);
+    const updated = await updateProduct(id, product);
     return Response.json({ success: true, product: updated });
   } catch (err) {
     return Response.json(
@@ -42,7 +42,7 @@ export async function DELETE(_request: Request, { params }: { params: Promise<{ 
 
   const { id } = await params;
   try {
-    deleteProduct(id);
+    await deleteProduct(id);
     return Response.json({ success: true, message: "Product deleted." });
   } catch (err) {
     return Response.json(

@@ -2,8 +2,10 @@ import { orderRequestSchema } from "@/lib/validation/orderSchema";
 import { getProductBySku } from "@/lib/products";
 import { generateProForma } from "@/lib/pdf/generateProForma";
 import { sendOrderEmails } from "@/lib/email/sendOrderEmails";
+import { createOrder } from "@/lib/orders";
+import { getCurrentRetailer } from "@/lib/auth/retailer-session";
 import { siteConfig } from "@/config/site.config";
-import type { OrderRequestLineItem, OrderRequestResponse } from "@/types/order";
+import type { OrderRequestCustomer, OrderRequestLineItem, OrderRequestResponse } from "@/types/order";
 
 export const runtime = "nodejs";
 
@@ -37,6 +39,12 @@ function invoiceNumber(): string {
 
 export async function POST(request: Request) {
   try {
+    const retailer = await getCurrentRetailer();
+    if (!retailer) {
+      const body: OrderRequestResponse = { success: false, message: "Please log in to request a Pro Forma Invoice." };
+      return Response.json(body, { status: 401 });
+    }
+
     const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
     if (isRateLimited(ip)) {
       const body: OrderRequestResponse = {
@@ -77,11 +85,27 @@ export async function POST(request: Request) {
       return silentOk();
     }
 
+    // The customer of record is always the authenticated account's saved
+    // profile, never whatever the client submitted — only the free-text
+    // notes field is trusted from the request body.
+    const customer: OrderRequestCustomer = {
+      companyName: retailer.companyName,
+      vatNumber: retailer.vatNumber || undefined,
+      contactName: retailer.contactName,
+      email: retailer.email,
+      phone: retailer.phone,
+      country: retailer.country,
+      city: retailer.city,
+      shippingAddress: retailer.shippingAddress,
+      notes: order.customer.notes,
+      preferredShipping: retailer.preferredShipping,
+    };
+
     // Recompute every line item from the authoritative product catalog —
     // client-submitted prices/subtotals are display-only and never trusted.
     const resolvedItems: OrderRequestLineItem[] = [];
     for (const submitted of order.items) {
-      const product = getProductBySku(submitted.sku);
+      const product = await getProductBySku(submitted.sku);
       if (!product) {
         const body: OrderRequestResponse = {
           success: false,
@@ -117,12 +141,30 @@ export async function POST(request: Request) {
     const number = invoiceNumber();
     const date = new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" }).format(new Date());
 
+    // Persist the order first so it shows up in /admin/orders even if PDF
+    // generation or email delivery below fails — the request itself is
+    // never lost.
+    try {
+      await createOrder({
+        invoiceNumber: number,
+        retailerId: retailer.id,
+        status: "new",
+        customer,
+        items: resolvedItems,
+        totals,
+        currency: order.currency,
+        paymentTerms: order.paymentTerms,
+      });
+    } catch (err) {
+      console.error("Failed to save order record:", err);
+    }
+
     let pdfBuffer: Buffer;
     try {
       pdfBuffer = await generateProForma({
         invoiceNumber: number,
         date,
-        customer: order.customer,
+        customer,
         items: resolvedItems,
         totals,
         currency: order.currency,
@@ -141,7 +183,7 @@ export async function POST(request: Request) {
       const { companySent, customerSent } = await sendOrderEmails({
         invoiceNumber: number,
         date,
-        customer: order.customer,
+        customer,
         items: resolvedItems,
         totals,
         currency: order.currency,

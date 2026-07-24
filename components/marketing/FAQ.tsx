@@ -7,7 +7,7 @@ export function FAQ() {
   const items = [
     {
       q: "Do I need an account to place an order?",
-      a: "No. Browse the catalog, build your order and submit a Pro Forma Invoice request — no login, checkout or card details required.",
+      a: "Yes, and it takes under a minute — company name, contact details and shipping address. No card details, ever. Once it's saved, every order after that is a single confirm.",
     },
     {
       q: "What's the minimum order?",

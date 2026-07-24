@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, formatPricePerPair } from "@/lib/format";
 import type { Product } from "@/types/product";
 
 const STOCK_DOT: Record<Product["stockStatus"], string> = {
@@ -58,7 +58,10 @@ export function ProductsTable({ products }: { products: Product[] }) {
               </td>
               <td className="px-5 py-3 text-ink/60">{product.sku}</td>
               <td className="px-5 py-3 text-ink/60 capitalize">{product.category}</td>
-              <td className="px-5 py-3">{formatCurrency(product.pricePerPackage)}</td>
+              <td className="px-5 py-3">
+                <p>{formatCurrency(product.pricePerPackage)}</p>
+                <p className="text-xs text-ink/40">{formatPricePerPair(product.pricePerPackage, product.packageSize)}</p>
+              </td>
               <td className="px-5 py-3">
                 <span className="inline-flex items-center gap-1.5 text-xs text-ink/60">
                   <span className={`w-1.5 h-1.5 rounded-full ${STOCK_DOT[product.stockStatus]}`} />

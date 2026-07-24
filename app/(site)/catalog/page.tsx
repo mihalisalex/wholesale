@@ -9,9 +9,9 @@ export function generateMetadata(): Metadata {
   return { title: seo.pages.catalog.title, description: seo.pages.catalog.description };
 }
 
-export default function CatalogPage() {
-  const products = getAllProducts();
-  const options = getFilterOptions();
+export default async function CatalogPage() {
+  const products = await getAllProducts();
+  const options = await getFilterOptions();
 
   return (
     <main className="max-w-[1200px] mx-auto px-5 md:px-8 py-14 md:py-20">

@@ -39,6 +39,10 @@ export const collectionInputSchema = z.object({
 
 export type CollectionInput = z.infer<typeof collectionInputSchema>;
 
+export const orderStatusInputSchema = z.object({
+  status: z.enum(["new", "reviewed"]),
+});
+
 const pageSeoSchema = z.object({
   title: z.string().min(1),
   description: z.string().min(1),

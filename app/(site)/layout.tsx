@@ -6,9 +6,12 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartRoot } from "@/components/cart/CartRoot";
 import { MobileChrome } from "@/components/mobile/MobileChrome";
+import { CookieConsent } from "@/components/layout/CookieConsent";
+import { Analytics } from "@/components/layout/Analytics";
 import { siteConfig } from "@/config/site.config";
 import { getSeoSettings } from "@/lib/seo";
 import { getAllProducts } from "@/lib/products";
+import { getCurrentRetailer } from "@/lib/auth/retailer-session";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const playfair = Playfair_Display({ variable: "--font-playfair", subsets: ["latin"], weight: ["500", "600", "700"] });
@@ -24,8 +27,9 @@ export const metadata: Metadata = {
   ...(seo.twitterHandle ? { twitter: { card: "summary_large_image", site: seo.twitterHandle } } : {}),
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const products = getAllProducts();
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const products = await getAllProducts();
+  const retailer = await getCurrentRetailer();
 
   return (
     <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
@@ -53,7 +57,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className="font-sans">
         <CartProvider>
-          <Header />
+          <Header retailer={retailer ? { companyName: retailer.companyName } : null} />
           <div className="pt-14 md:pt-[78px]">
             {children}
             <Footer />
@@ -61,6 +65,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <div className="pb-20 md:hidden" aria-hidden="true" />
           <CartRoot />
           <MobileChrome products={products} />
+          <CookieConsent />
+          <Analytics />
         </CartProvider>
       </body>
     </html>

@@ -2,11 +2,11 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 
 const STEPS = [
-  { num: "01", title: "Browse the catalog", description: "Filter by category, color, material or collection to find your styles." },
-  { num: "02", title: "Add packages to cart", description: "Each product is sold in fixed 8-pair packages — set your quantity per style." },
-  { num: "03", title: "Request a quote", description: "Submit your company and shipping details — no account or payment required." },
-  { num: "04", title: "Receive your Pro Forma", description: "We email a Pro Forma Invoice PDF within 24 hours, to you and our team." },
-  { num: "05", title: "Confirm and pay by transfer", description: "Approve the quote and pay by bank transfer to begin production and shipping." },
+  { num: "01", title: "Create your account", description: "Register once with your company and shipping details — free, under a minute." },
+  { num: "02", title: "Browse the catalog", description: "Filter by category, color, material or collection to find your styles." },
+  { num: "03", title: "Add packages to cart", description: "Each product is sold in fixed 8-pair packages — set your quantity per style." },
+  { num: "04", title: "Confirm & send", description: "Every order after your first is a single confirm — no retyping your details." },
+  { num: "05", title: "Receive your Pro Forma", description: "We email a Pro Forma Invoice PDF within 24 hours, to you and our team." },
 ];
 
 export function ProcessSteps() {

@@ -48,8 +48,8 @@ const FEATURES = [
     ),
   },
   {
-    title: "No Account Needed",
-    description: "Browse, build an order and request a quote — no login, no checkout, no card details.",
+    title: "Your Details, Saved",
+    description: "Create a free account once — every Pro Forma Invoice request after that is a single confirm.",
     icon: (
       <>
         <circle cx="15" cy="15" r="5" fill="none" stroke="currentColor" strokeWidth="1.4" />

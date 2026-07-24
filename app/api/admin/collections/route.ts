@@ -9,7 +9,7 @@ export const runtime = "nodejs";
 export async function GET() {
   const unauthorized = await requireAdminApi();
   if (unauthorized) return unauthorized;
-  return Response.json({ success: true, collections: getAllCollections() });
+  return Response.json({ success: true, collections: await getAllCollections() });
 }
 
 export async function POST(request: Request) {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
   const collection: Collection = { ...data, id: crypto.randomUUID() };
   try {
-    createCollection(collection);
+    await createCollection(collection);
   } catch (err) {
     return Response.json(
       { success: false, message: err instanceof Error ? err.message : "Could not create collection." },

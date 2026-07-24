@@ -3,8 +3,8 @@ import { getAllProducts } from "@/lib/products";
 import { ProductsTable } from "@/components/admin/ProductsTable";
 import { Button } from "@/components/ui/Button";
 
-export default function AdminProductsPage() {
-  const products = [...getAllProducts()].sort((a, b) => a.name.localeCompare(b.name));
+export default async function AdminProductsPage() {
+  const products = [...(await getAllProducts())].sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div>

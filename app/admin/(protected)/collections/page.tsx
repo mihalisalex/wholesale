@@ -1,8 +1,8 @@
 import { getAllCollections } from "@/lib/collections";
 import { CollectionsManager } from "@/components/admin/CollectionsManager";
 
-export default function AdminCollectionsPage() {
-  const collections = getAllCollections();
+export default async function AdminCollectionsPage() {
+  const collections = await getAllCollections();
 
   return (
     <div>

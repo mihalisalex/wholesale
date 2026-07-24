@@ -31,7 +31,7 @@ export function Hero() {
           </h1>
           <p className="text-base md:text-lg text-ink/60 max-w-[46ch] mb-8 md:mb-10 leading-relaxed">
             Browse the Hervé Footwear catalog, add 8-pair wholesale packages to your cart, and submit a Pro Forma
-            Invoice request in minutes — no account, no checkout, no online payment.
+            Invoice request in minutes — free retailer account, no checkout, no online payment.
           </p>
           <div className="flex flex-wrap gap-4 mb-12 md:mb-14">
             <Button href="/catalog">Browse Catalog</Button>
@@ -57,7 +57,7 @@ export function Hero() {
         >
           <div className="absolute left-[4%] top-[6%] w-[86%] h-[82%] rounded-brand overflow-hidden shadow-brand -rotate-2">
             <Image
-              src="https://images.unsplash.com/photo-1551851363-65f4f9107b97"
+              src="/images/marketing/hero-shelves.jpg"
               alt="Shelves of leather footwear ready for wholesale order"
               fill
               priority

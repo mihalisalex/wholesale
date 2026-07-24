@@ -25,3 +25,11 @@ export function formatDate(date: Date | string): string {
 export function pairsForPackages(quantityPackages: number, packageSize: number = siteConfig.commerce.packageSize): number {
   return quantityPackages * packageSize;
 }
+
+export function pricePerPair(pricePerPackage: number, packageSize: number = siteConfig.commerce.packageSize): number {
+  return pricePerPackage / packageSize;
+}
+
+export function formatPricePerPair(pricePerPackage: number, packageSize: number = siteConfig.commerce.packageSize): string {
+  return `${formatCurrency(pricePerPair(pricePerPackage, packageSize))} / pair`;
+}

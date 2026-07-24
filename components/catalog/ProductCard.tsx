@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ProductThumb } from "@/components/product/ProductThumb";
-import { formatCurrency } from "@/lib/format";
+import { formatCurrency, formatPricePerPair } from "@/lib/format";
 import type { Product } from "@/types/product";
 
 const STOCK_LABEL: Record<Product["stockStatus"], string> = {
@@ -60,7 +60,12 @@ export function ProductCard({ product }: { product: Product }) {
             <span className={`w-1.5 h-1.5 rounded-full ${STOCK_DOT[product.stockStatus]}`} />
             {STOCK_LABEL[product.stockStatus]}
           </span>
-          <span className="font-serif text-lg sm:text-base font-semibold">{formatCurrency(product.pricePerPackage)}</span>
+          <span className="text-right">
+            <span className="block font-serif text-lg sm:text-base font-semibold leading-tight">
+              {formatCurrency(product.pricePerPackage)}
+            </span>
+            <span className="block text-[0.68rem] text-ink/45 leading-tight">{formatPricePerPair(product.pricePerPackage, product.packageSize)}</span>
+          </span>
         </div>
         <p className="text-[0.7rem] text-ink/40 mt-1">MOQ: 1 package (8 pairs)</p>
       </div>

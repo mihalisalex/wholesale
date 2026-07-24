@@ -49,3 +49,18 @@ export interface OrderRequestResponse {
   message: string;
   errors?: Record<string, string>;
 }
+
+export type OrderStatus = "new" | "reviewed";
+
+/** A submitted order request as persisted for the admin dashboard. */
+export interface StoredOrder {
+  id: string;
+  invoiceNumber: string;
+  createdAt: string;
+  status: OrderStatus;
+  customer: OrderRequestCustomer;
+  items: OrderRequestLineItem[];
+  totals: OrderRequestTotals;
+  currency: string;
+  paymentTerms: string;
+}

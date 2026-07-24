@@ -14,7 +14,11 @@ const NAV_LINKS = [
   { href: "/#contact", label: "Contact" },
 ];
 
-export function Header() {
+interface HeaderProps {
+  retailer: { companyName: string } | null;
+}
+
+export function Header({ retailer }: HeaderProps) {
   const { totals, openDrawer, hasHydrated, state } = useCart();
   const hasItems = hasHydrated && state.items.length > 0;
 
@@ -40,6 +44,12 @@ export function Header() {
         </nav>
 
         <div className="flex items-center justify-end gap-4">
+          <Link
+            href={retailer ? "/account" : "/login"}
+            className="hidden md:inline-flex text-sm font-medium text-ink/70 hover:text-ink transition-colors"
+          >
+            {retailer ? retailer.companyName || "My Account" : "Log in"}
+          </Link>
           <Button href="/catalog" size="sm" className="hidden md:inline-flex">
             Browse Catalog
           </Button>

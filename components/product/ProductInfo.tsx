@@ -6,7 +6,7 @@ import { QuantityStepper } from "./QuantityStepper";
 import { StickyMobileAddBar } from "./StickyMobileAddBar";
 import { Button } from "@/components/ui/Button";
 import { useCart } from "@/hooks/useCart";
-import { formatCurrency, pairsForPackages } from "@/lib/format";
+import { formatCurrency, formatPricePerPair, pairsForPackages } from "@/lib/format";
 import { buildProductInquiryMessage, buildWhatsAppLink } from "@/lib/contact";
 
 const STOCK_LABEL: Record<Product["stockStatus"], string> = {
@@ -113,7 +113,11 @@ export function ProductInfo({ product }: { product: Product }) {
       <div className="bg-cream-dim rounded-brand p-6">
         <div className="flex items-baseline justify-between mb-4">
           <span className="font-serif text-2xl font-semibold">{formatCurrency(product.pricePerPackage)}</span>
-          <span className="text-sm text-ink/50">/ package (8 pairs)</span>
+          <span className="text-sm text-ink/50 text-right">
+            / package (8 pairs)
+            <br />
+            {formatPricePerPair(product.pricePerPackage, product.packageSize)}
+          </span>
         </div>
 
         <div className="flex items-center justify-between mb-5">

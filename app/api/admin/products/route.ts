@@ -9,7 +9,7 @@ export const runtime = "nodejs";
 export async function GET() {
   const unauthorized = await requireAdminApi();
   if (unauthorized) return unauthorized;
-  return Response.json({ success: true, products: getAllProducts() });
+  return Response.json({ success: true, products: await getAllProducts() });
 }
 
 export async function POST(request: Request) {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 
   const product: Product = { ...data, id: crypto.randomUUID() };
   try {
-    createProduct(product);
+    await createProduct(product);
   } catch (err) {
     return Response.json(
       { success: false, message: err instanceof Error ? err.message : "Could not create product." },

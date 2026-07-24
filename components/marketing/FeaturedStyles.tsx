@@ -4,10 +4,9 @@ import { SectionHead } from "@/components/ui/SectionHead";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 
-export function FeaturedStyles() {
-  const featured = getAllProducts()
-    .filter((p) => p.tags.includes("bestseller"))
-    .slice(0, 8);
+export async function FeaturedStyles() {
+  const products = await getAllProducts();
+  const featured = products.filter((p) => p.tags.includes("bestseller")).slice(0, 8);
 
   return (
     <section className="py-20 md:py-28 bg-cream-dim">

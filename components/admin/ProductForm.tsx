@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/Button";
+import { formatPricePerPair } from "@/lib/format";
 import { ProductLineArt, type ProductArtKey } from "@/components/icons/ProductLineArt";
 import type { Product, ProductCategory, ProductGender, StockStatus } from "@/types/product";
 import type { Collection } from "@/types/collection";
@@ -358,6 +359,9 @@ export function ProductForm({ initialProduct, collections }: ProductFormProps) {
               value={values.pricePerPackage}
               onChange={(e) => update("pricePerPackage", e.target.value)}
             />
+            {Number(values.pricePerPackage) > 0 && (
+              <p className="text-xs text-ink/40 mt-1">= {formatPricePerPair(Number(values.pricePerPackage))}</p>
+            )}
             {errors.pricePerPackage && <p className="text-xs text-accent-3 mt-1">{errors.pricePerPackage}</p>}
           </div>
           <div>

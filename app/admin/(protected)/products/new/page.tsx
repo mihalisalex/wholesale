@@ -1,8 +1,8 @@
 import { getAllCollections } from "@/lib/collections";
 import { ProductForm } from "@/components/admin/ProductForm";
 
-export default function NewProductPage() {
-  const collections = getAllCollections();
+export default async function NewProductPage() {
+  const collections = await getAllCollections();
 
   return (
     <div>
