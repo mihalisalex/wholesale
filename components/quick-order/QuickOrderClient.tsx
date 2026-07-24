@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import type { Product } from "@/types/product";
+import type { FilterOptions } from "@/lib/products";
 import { searchProducts } from "@/lib/search";
 import { formatCurrency, formatNumber } from "@/lib/format";
 import { useCart } from "@/hooks/useCart";
@@ -10,14 +11,56 @@ import { Button } from "@/components/ui/Button";
 import { ProductThumb } from "@/components/product/ProductThumb";
 import { OrderModal } from "@/components/order/OrderModal";
 import { QuickViewModal } from "./QuickViewModal";
+import { MobileFilterSheet } from "@/components/catalog/MobileFilterSheet";
+import type { CatalogFilters } from "@/components/catalog/FilterSidebar";
 
-export function QuickOrderClient({ products }: { products: Product[] }) {
+function emptyFilters(options: FilterOptions): CatalogFilters {
+  return {
+    category: [],
+    color: [],
+    material: [],
+    size: [],
+    collection: [],
+    gender: [],
+    newArrivalsOnly: false,
+    minPrice: options.priceRange.min,
+    maxPrice: options.priceRange.max,
+  };
+}
+
+export function QuickOrderClient({ products, options }: { products: Product[]; options: FilterOptions }) {
   const [query, setQuery] = useState("");
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+  const [isFilterSheetOpen, setFilterSheetOpen] = useState(false);
+  const [filters, setFilters] = useState<CatalogFilters>(() => emptyFilters(options));
   const { state, totals, addItem, updateQuantity } = useCart();
 
-  const results = useMemo(() => (query.trim() ? searchProducts(products, query) : products), [products, query]);
+  const activeFilterCount =
+    filters.category.length +
+    filters.color.length +
+    filters.material.length +
+    filters.size.length +
+    filters.collection.length +
+    filters.gender.length +
+    (filters.newArrivalsOnly ? 1 : 0) +
+    (filters.minPrice !== options.priceRange.min ? 1 : 0) +
+    (filters.maxPrice !== options.priceRange.max ? 1 : 0);
+
+  const results = useMemo(() => {
+    const searched = query.trim() ? searchProducts(products, query) : products;
+    return searched.filter((p) => {
+      if (filters.category.length && !filters.category.includes(p.category)) return false;
+      if (filters.color.length && !filters.color.includes(p.color)) return false;
+      if (filters.material.length && !filters.material.includes(p.material)) return false;
+      if (filters.size.length && !filters.size.some((s) => p.sizes.includes(s))) return false;
+      if (filters.collection.length && !filters.collection.includes(p.collection)) return false;
+      if (filters.gender.length && !filters.gender.includes(p.gender)) return false;
+      if (filters.newArrivalsOnly && !p.isNewArrival) return false;
+      if (p.pricePerPackage < filters.minPrice || p.pricePerPackage > filters.maxPrice) return false;
+      return true;
+    });
+  }, [products, query, filters]);
 
   function quantityFor(productId: string): number {
     return state.items.find((i) => i.productId === productId)?.quantityPackages ?? 0;
@@ -55,6 +98,28 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
 
   return (
     <div className="pb-40 md:pb-0">
+      <div className="flex items-start justify-between gap-4 mb-5">
+        <div>
+          <p className="text-[0.7rem] uppercase tracking-[0.14em] font-bold text-gold mb-1.5">Repeat Buyers</p>
+          <h1 className="font-serif text-xl md:text-4xl font-semibold">Quick Order</h1>
+        </div>
+        <button
+          type="button"
+          onClick={() => setFilterSheetOpen(true)}
+          className="md:hidden shrink-0 inline-flex items-center gap-2 rounded-full border border-ink/20 px-4 py-2.5 text-sm font-semibold mt-1"
+        >
+          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <path d="M4 6h16M7 12h10M10 18h4" strokeLinecap="round" />
+          </svg>
+          Filters
+          {activeFilterCount > 0 && (
+            <span className="bg-ink text-cream text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">
+              {activeFilterCount}
+            </span>
+          )}
+        </button>
+      </div>
+
       <div className="relative mb-6">
         <svg
           viewBox="0 0 24 24"
@@ -77,7 +142,11 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
         />
       </div>
 
-      {results.length === 0 && <p className="text-center text-ink/50 py-16">No styles match &ldquo;{query}&rdquo;.</p>}
+      {results.length === 0 && (
+        <p className="text-center text-ink/50 py-16">
+          {query.trim() ? <>No styles match &ldquo;{query}&rdquo;.</> : "No styles match those filters."}
+        </p>
+      )}
 
       <div className="bg-white border border-ink/10 rounded-brand divide-y divide-ink/10 overflow-hidden">
         {results.map((product) => {
@@ -140,6 +209,16 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
         quantity={quickViewProduct ? quantityFor(quickViewProduct.id) : 0}
         onQuantityChange={(next) => quickViewProduct && setQuantity(quickViewProduct, next)}
         onClose={() => setQuickViewProduct(null)}
+      />
+
+      <MobileFilterSheet
+        isOpen={isFilterSheetOpen}
+        onClose={() => setFilterSheetOpen(false)}
+        options={options}
+        filters={filters}
+        onChange={setFilters}
+        onReset={() => setFilters(emptyFilters(options))}
+        resultCount={results.length}
       />
     </div>
   );
