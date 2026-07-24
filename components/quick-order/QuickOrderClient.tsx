@@ -9,10 +9,12 @@ import { QuantityStepper } from "@/components/product/QuantityStepper";
 import { Button } from "@/components/ui/Button";
 import { ProductThumb } from "@/components/product/ProductThumb";
 import { OrderModal } from "@/components/order/OrderModal";
+import { QuickViewModal } from "./QuickViewModal";
 
 export function QuickOrderClient({ products }: { products: Product[] }) {
   const [query, setQuery] = useState("");
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const { state, totals, addItem, updateQuantity } = useCart();
 
   const results = useMemo(() => (query.trim() ? searchProducts(products, query) : products), [products, query]);
@@ -81,25 +83,31 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
         {results.map((product) => {
           const qty = quantityFor(product.id);
           return (
-            <div key={product.id} className="flex items-center gap-3 px-3 py-2.5">
-              <div
-                className="relative w-11 h-11 shrink-0 rounded-brand-sm overflow-hidden flex items-center justify-center"
-                style={{ background: `linear-gradient(160deg, ${product.colorHex}18, #fff)` }}
+            <div key={product.id} className="flex items-center gap-3 px-3 py-4">
+              <button
+                type="button"
+                onClick={() => setQuickViewProduct(product)}
+                className="flex flex-1 items-center gap-3 min-w-0 text-left active:opacity-70 transition-opacity"
               >
-                <ProductThumb
-                  image={product.images[0]}
-                  sizes="44px"
-                  imgClassName="w-full h-full object-cover"
-                  fallbackClassName="w-full h-full p-1.5 text-ink"
-                />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="font-serif font-semibold text-sm truncate">{product.name}</p>
-                <p className="text-xs text-ink/50 truncate">
-                  {product.sku} · {formatCurrency(product.pricePerPackage)}/pkg
-                </p>
-              </div>
-              <QuantityStepper value={qty} onChange={(next) => setQuantity(product, next)} min={0} />
+                <div
+                  className="relative w-16 h-16 shrink-0 rounded-brand-sm overflow-hidden flex items-center justify-center"
+                  style={{ background: `linear-gradient(160deg, ${product.colorHex}18, #fff)` }}
+                >
+                  <ProductThumb
+                    image={product.images[0]}
+                    sizes="64px"
+                    imgClassName="w-full h-full object-cover"
+                    fallbackClassName="w-full h-full p-2 text-ink"
+                  />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-serif font-semibold text-sm truncate">{product.name}</p>
+                  <p className="text-xs text-ink/50 truncate">
+                    {product.sku} · {formatCurrency(product.pricePerPackage)}/pkg
+                  </p>
+                </div>
+              </button>
+              <QuantityStepper size="sm" value={qty} onChange={(next) => setQuantity(product, next)} min={0} />
             </div>
           );
         })}
@@ -126,6 +134,13 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
       )}
 
       <OrderModal isOpen={isOrderModalOpen} onClose={() => setOrderModalOpen(false)} />
+
+      <QuickViewModal
+        product={quickViewProduct}
+        quantity={quickViewProduct ? quantityFor(quickViewProduct.id) : 0}
+        onQuantityChange={(next) => quickViewProduct && setQuantity(quickViewProduct, next)}
+        onClose={() => setQuickViewProduct(null)}
+      />
     </div>
   );
 }
