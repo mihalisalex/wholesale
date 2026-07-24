@@ -15,7 +15,7 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
   const [isOrderModalOpen, setOrderModalOpen] = useState(false);
   const { state, totals, addItem, updateQuantity } = useCart();
 
-  const results = useMemo(() => (query.trim() ? searchProducts(products, query).slice(0, 30) : []), [products, query]);
+  const results = useMemo(() => (query.trim() ? searchProducts(products, query) : products), [products, query]);
 
   function quantityFor(productId: string): number {
     return state.items.find((i) => i.productId === productId)?.quantityPackages ?? 0;
@@ -75,50 +75,31 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
         />
       </div>
 
-      {!query.trim() && (
-        <p className="text-center text-ink/50 py-16">Know what you need? Search a SKU or style name to add it straight to your order.</p>
-      )}
-      {query.trim() && results.length === 0 && <p className="text-center text-ink/50 py-16">No styles match &ldquo;{query}&rdquo;.</p>}
+      {results.length === 0 && <p className="text-center text-ink/50 py-16">No styles match &ldquo;{query}&rdquo;.</p>}
 
-      <div className="space-y-3">
+      <div className="bg-white border border-ink/10 rounded-brand divide-y divide-ink/10 overflow-hidden">
         {results.map((product) => {
           const qty = quantityFor(product.id);
           return (
-            <div key={product.id} className="bg-white border border-ink/10 rounded-brand p-4">
-              <div className="flex items-center gap-4">
-                <div
-                  className="relative w-16 h-16 shrink-0 rounded-brand-sm overflow-hidden flex items-center justify-center"
-                  style={{ background: `linear-gradient(160deg, ${product.colorHex}18, #fff)` }}
-                >
-                  <ProductThumb
-                    image={product.images[0]}
-                    imgClassName="w-full h-full object-cover"
-                    fallbackClassName="w-full h-full p-2.5 text-ink"
-                  />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-serif font-semibold truncate">{product.name}</p>
-                  <p className="text-xs text-ink/50 mb-1">
-                    {product.sku} · {product.color}
-                  </p>
-                  <p className="text-sm font-semibold">{formatCurrency(product.pricePerPackage)} / pkg</p>
-                </div>
-                {qty === 0 && (
-                  <button
-                    type="button"
-                    onClick={() => setQuantity(product, 1)}
-                    className="shrink-0 rounded-full bg-ink text-cream font-semibold text-sm px-5 py-3 active:scale-95 transition-transform"
-                  >
-                    Add
-                  </button>
-                )}
+            <div key={product.id} className="flex items-center gap-3 px-3 py-2.5">
+              <div
+                className="relative w-11 h-11 shrink-0 rounded-brand-sm overflow-hidden flex items-center justify-center"
+                style={{ background: `linear-gradient(160deg, ${product.colorHex}18, #fff)` }}
+              >
+                <ProductThumb
+                  image={product.images[0]}
+                  sizes="44px"
+                  imgClassName="w-full h-full object-cover"
+                  fallbackClassName="w-full h-full p-1.5 text-ink"
+                />
               </div>
-              {qty > 0 && (
-                <div className="flex items-center justify-between mt-3 pt-3 border-t border-ink/10">
-                  <span className="text-sm text-ink/50">In your order</span>
-                  <QuantityStepper value={qty} onChange={(next) => setQuantity(product, next)} min={0} />
-                </div>
-              )}
+              <div className="flex-1 min-w-0">
+                <p className="font-serif font-semibold text-sm truncate">{product.name}</p>
+                <p className="text-xs text-ink/50 truncate">
+                  {product.sku} · {formatCurrency(product.pricePerPackage)}/pkg
+                </p>
+              </div>
+              <QuantityStepper value={qty} onChange={(next) => setQuantity(product, next)} min={0} />
             </div>
           );
         })}

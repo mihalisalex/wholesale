@@ -16,20 +16,20 @@ export function Hero() {
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-[1.05fr_0.95fr] gap-10 items-center pb-16 md:pb-24">
         <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
-          <p className="text-[0.78rem] uppercase tracking-[0.14em] font-bold text-gold mb-3.5">Wholesale Footwear · Est. Athens</p>
-          <h1 className="font-serif text-4xl md:text-6xl font-semibold leading-[1.08] mb-5">
+          <p className="text-[0.6rem] md:text-[0.78rem] uppercase tracking-[0.14em] font-bold text-gold mb-2.5 md:mb-3.5">Wholesale Footwear · Est. Athens</p>
+          <h1 className="font-serif text-[1.65rem] md:text-6xl font-semibold leading-[1.15] md:leading-[1.08] mb-3 md:mb-5">
             Build your order,
             <br />
             request a <span className="italic text-gold">quote</span>.
           </h1>
-          <p className="text-base md:text-lg text-ink/60 max-w-[46ch] mb-8">
+          <p className="text-sm md:text-lg text-ink/60 max-w-[46ch] mb-6 md:mb-8">
             Browse the Hervé Footwear catalog, add 8-pair wholesale packages to your cart, and submit a Pro Forma
             Invoice request in minutes — no account, no checkout, no online payment.
           </p>
           <div className="flex flex-wrap gap-4 mb-11">
             <Button href="/catalog">Browse Catalog</Button>
-            <Button href="/catalog?isNewArrival=true" variant="ghost">
-              New Arrivals
+            <Button href="/quick-order" variant="ghost">
+              Quick Order
             </Button>
           </div>
           <ul className="flex gap-8 pt-6 border-t border-ink/10 text-sm text-ink/60">

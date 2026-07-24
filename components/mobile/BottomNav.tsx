@@ -3,14 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCart } from "@/hooks/useCart";
-import { buildWhatsAppLink } from "@/lib/contact";
 
 interface BottomNavProps {
   onSearchClick: () => void;
 }
 
 const itemClasses = (active: boolean) =>
-  `flex flex-1 flex-col items-center justify-center gap-1 py-2 text-[0.68rem] font-semibold ${
+  `flex flex-1 flex-col items-center justify-center gap-1 py-2 px-0.5 text-[0.64rem] leading-tight text-center font-semibold ${
     active ? "text-gold" : "text-ink/55"
   }`;
 
@@ -21,6 +20,7 @@ export function BottomNav({ onSearchClick }: BottomNavProps) {
 
   const isHome = pathname === "/";
   const isCatalog = pathname === "/catalog";
+  const isQuickOrder = pathname === "/quick-order";
 
   return (
     <nav
@@ -34,6 +34,13 @@ export function BottomNav({ onSearchClick }: BottomNavProps) {
           <path d="M6 10v9a1 1 0 0 0 1 1h4v-6h2v6h4a1 1 0 0 0 1-1v-9" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         Home
+      </Link>
+
+      <Link href="/quick-order" className={itemClasses(isQuickOrder)} aria-current={isQuickOrder ? "page" : undefined}>
+        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.7">
+          <path d="M13 3 4 14h6l-1 7 9-11h-6l1-7Z" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        Quick Order
       </Link>
 
       <Link href="/catalog" className={itemClasses(isCatalog)} aria-current={isCatalog ? "page" : undefined}>
@@ -66,24 +73,6 @@ export function BottomNav({ onSearchClick }: BottomNavProps) {
           </span>
         )}
       </button>
-
-      <a
-        href={buildWhatsAppLink()}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={itemClasses(false)}
-        aria-label="Message us on WhatsApp"
-      >
-        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.7">
-          <path
-            d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.6-1.3A9 9 0 1 0 12 3Z"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path d="M8.5 9.8c.3 2.7 2 4.4 4.7 4.7.9.1 1.6-.5 1.6-1.3v-.5l-1.9-.7-.6.7c-1-.5-1.8-1.3-2.3-2.3l.7-.6-.7-1.9h-.5c-.8 0-1.4.7-1.3 1.6Z" />
-        </svg>
-        WhatsApp
-      </a>
     </nav>
   );
 }

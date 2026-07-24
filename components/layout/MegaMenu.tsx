@@ -107,7 +107,7 @@ export function MegaMenu({ onNavigate }: MegaMenuProps) {
               </div>
             </div>
 
-            <div className="hidden md:block rounded-brand-sm p-5 text-white bg-gradient-to-br from-gold to-accent-2">
+            <div className="hidden md:block rounded-brand-sm p-5 text-white bg-gradient-to-br from-ink to-ink-soft">
               <p className="text-[0.72rem] uppercase tracking-wider font-bold text-white/85 mb-2">New This Season</p>
               <p className="font-serif text-base font-semibold mb-1.5">Full Catalog</p>
               <p className="text-xs text-white/85 mb-4">Sixteen styles across men&rsquo;s and women&rsquo;s, ready to sample.</p>
