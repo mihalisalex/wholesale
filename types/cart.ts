@@ -4,6 +4,7 @@ export interface CartItem {
   name: string;
   sku: string;
   art: string;
+  photoUrl?: string;
   color: string;
   colorHex: string;
   pricePerPackage: number;

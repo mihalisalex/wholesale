@@ -7,7 +7,7 @@ import { formatCurrency, formatNumber } from "@/lib/format";
 import { useCart } from "@/hooks/useCart";
 import { QuantityStepper } from "@/components/product/QuantityStepper";
 import { Button } from "@/components/ui/Button";
-import { ProductLineArt, type ProductArtKey } from "@/components/icons/ProductLineArt";
+import { ProductThumb } from "@/components/product/ProductThumb";
 import { OrderModal } from "@/components/order/OrderModal";
 
 export function QuickOrderClient({ products }: { products: Product[] }) {
@@ -35,6 +35,7 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
           name: product.name,
           sku: product.sku,
           art: product.images[0]?.art ?? "",
+          photoUrl: product.images[0]?.photoUrl,
           color: product.color,
           colorHex: product.colorHex,
           pricePerPackage: product.pricePerPackage,
@@ -86,10 +87,14 @@ export function QuickOrderClient({ products }: { products: Product[] }) {
             <div key={product.id} className="bg-white border border-ink/10 rounded-brand p-4">
               <div className="flex items-center gap-4">
                 <div
-                  className="w-16 h-16 shrink-0 rounded-brand-sm p-2.5 flex items-center justify-center"
+                  className="relative w-16 h-16 shrink-0 rounded-brand-sm overflow-hidden flex items-center justify-center"
                   style={{ background: `linear-gradient(160deg, ${product.colorHex}18, #fff)` }}
                 >
-                  <ProductLineArt art={product.images[0]?.art as ProductArtKey} className="w-full h-full text-ink" />
+                  <ProductThumb
+                    image={product.images[0]}
+                    imgClassName="w-full h-full object-cover"
+                    fallbackClassName="w-full h-full p-2.5 text-ink"
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="font-serif font-semibold truncate">{product.name}</p>

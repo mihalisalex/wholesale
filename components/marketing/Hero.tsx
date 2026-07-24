@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 
@@ -50,26 +51,15 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
           className="relative flex justify-center"
         >
-          <div className="w-full max-w-[460px] bg-ink rounded-brand p-10 shadow-brand rotate-2">
-            <svg viewBox="0 0 400 260" className="w-full h-auto">
-              <ellipse cx="200" cy="225" rx="150" ry="14" fill="#000" opacity="0.18" />
-              <path
-                d="M40 175 C40 140 75 120 110 118 C130 116 140 100 165 92 C195 82 230 84 255 96 C275 105 285 100 300 108 C325 120 345 135 355 160 C362 178 358 195 335 198 L60 198 C46 198 40 188 40 175 Z"
-                fill="#12131C"
-                stroke="#5B4FE8"
-                strokeWidth="1.5"
-              />
-              <path
-                d="M110 118 C130 116 140 100 165 92 C195 82 230 84 255 96"
-                fill="none"
-                stroke="#14C8A5"
-                strokeWidth="1.2"
-                opacity="0.8"
-              />
-              <circle cx="150" cy="150" r="2" fill="#FF7A63" />
-              <circle cx="185" cy="140" r="2" fill="#FF7A63" />
-              <circle cx="220" cy="133" r="2" fill="#FF7A63" />
-            </svg>
+          <div className="relative w-full h-[360px] max-w-[460px] bg-ink rounded-brand p-3 shadow-brand rotate-2 overflow-hidden">
+            <Image
+              src="https://images.unsplash.com/photo-1551851363-65f4f9107b97"
+              alt="Shelves of leather footwear ready for wholesale order"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 460px"
+              className="object-cover rounded-brand-sm"
+            />
           </div>
 
           <div

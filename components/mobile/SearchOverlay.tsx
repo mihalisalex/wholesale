@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Product } from "@/types/product";
 import { searchProducts } from "@/lib/search";
 import { formatCurrency } from "@/lib/format";
-import { ProductLineArt, type ProductArtKey } from "@/components/icons/ProductLineArt";
+import { ProductThumb } from "@/components/product/ProductThumb";
 
 interface SearchOverlayProps {
   isOpen: boolean;
@@ -83,10 +83,14 @@ export function SearchOverlay({ isOpen, onClose, products }: SearchOverlayProps)
                   className="flex items-center gap-4 bg-white border border-ink/10 rounded-brand p-3"
                 >
                   <div
-                    className="w-16 h-16 shrink-0 rounded-brand-sm p-2.5 flex items-center justify-center"
+                    className="relative w-16 h-16 shrink-0 rounded-brand-sm overflow-hidden flex items-center justify-center"
                     style={{ background: `linear-gradient(160deg, ${product.colorHex}18, #fff)` }}
                   >
-                    <ProductLineArt art={product.images[0]?.art as ProductArtKey} className="w-full h-full text-ink" />
+                    <ProductThumb
+                      image={product.images[0]}
+                      imgClassName="w-full h-full object-cover"
+                      fallbackClassName="w-full h-full p-2.5 text-ink"
+                    />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-serif font-semibold truncate">{product.name}</p>

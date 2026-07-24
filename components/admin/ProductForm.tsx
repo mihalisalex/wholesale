@@ -36,6 +36,7 @@ interface ProductFormValues {
   sizesText: string;
   pricePerPackage: string;
   art: ProductArtKey;
+  photoUrl: string;
   tagsText: string;
   stockStatus: StockStatus;
   isNewArrival: boolean;
@@ -64,6 +65,7 @@ function emptyValues(collections: Collection[]): ProductFormValues {
     sizesText: "EU 40, EU 41, EU 42, EU 43, EU 44",
     pricePerPackage: "",
     art: "court",
+    photoUrl: "",
     tagsText: "",
     stockStatus: "in-stock",
     isNewArrival: false,
@@ -89,6 +91,7 @@ function fromProduct(product: Product): ProductFormValues {
     sizesText: product.sizes.join(", "),
     pricePerPackage: String(product.pricePerPackage),
     art: (product.images[0]?.art as ProductArtKey) ?? "court",
+    photoUrl: product.images[0]?.photoUrl ?? "",
     tagsText: product.tags.join(", "),
     stockStatus: product.stockStatus,
     isNewArrival: product.isNewArrival,
@@ -151,8 +154,11 @@ export function ProductForm({ initialProduct, collections }: ProductFormProps) {
       packageSize: 8 as const,
       pricePerPackage: Number(values.pricePerPackage),
       images: [
-        { art: values.art, alt: `${values.name} in ${values.color}, side profile` },
-        { art: values.art, alt: `${values.name} in ${values.color}, detail` },
+        {
+          art: values.art,
+          alt: `${values.name} in ${values.color}, product photo`,
+          photoUrl: values.photoUrl || undefined,
+        },
       ],
       tags: values.tagsText.split(",").map((s) => s.trim()).filter(Boolean),
       stockStatus: values.stockStatus,
@@ -308,7 +314,19 @@ export function ProductForm({ initialProduct, collections }: ProductFormProps) {
           {errors.material && <p className="text-xs text-accent-3 mt-1">{errors.material}</p>}
         </div>
         <div>
-          <label className={labelClasses}>Gallery style (placeholder art)</label>
+          <label className={labelClasses}>Photo URL (optional)</label>
+          <input
+            className={inputClasses}
+            placeholder="https://images.unsplash.com/photo-…"
+            value={values.photoUrl}
+            onChange={(e) => update("photoUrl", e.target.value)}
+          />
+          <p className="text-[0.7rem] text-ink/40 mt-1">
+            If set, this photo is shown instead of the placeholder art below on the catalog, product page and cart.
+          </p>
+        </div>
+        <div>
+          <label className={labelClasses}>Gallery style (placeholder art{values.photoUrl ? " — fallback only" : ""})</label>
           <div className="grid grid-cols-4 gap-3">
             {ART_OPTIONS.map((opt) => (
               <button

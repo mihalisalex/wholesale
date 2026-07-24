@@ -25,11 +25,8 @@
     "images": [
       {
         "art": "oxford",
-        "alt": "The Oxford in black, side profile"
-      },
-      {
-        "art": "oxford",
-        "alt": "The Oxford in black, detail of the cap-toe stitch"
+        "alt": "The Oxford — Black, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1777987601426-c05a82045862"
       }
     ],
     "tags": [
@@ -69,11 +66,8 @@
     "images": [
       {
         "art": "oxford",
-        "alt": "The Oxford in tan, side profile"
-      },
-      {
-        "art": "oxford",
-        "alt": "The Oxford in tan, detail of the cap-toe stitch"
+        "alt": "The Oxford — Tan, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1777987601426-c05a82045862"
       }
     ],
     "tags": [
@@ -111,11 +105,8 @@
     "images": [
       {
         "art": "chelsea",
-        "alt": "The Chelsea boot in black, side profile"
-      },
-      {
-        "art": "chelsea",
-        "alt": "The Chelsea boot in black, detail of the elastic gusset"
+        "alt": "The Chelsea — Black, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1534233812932-59b8fa1b780c"
       }
     ],
     "tags": [
@@ -153,11 +144,8 @@
     "images": [
       {
         "art": "chelsea",
-        "alt": "The Chelsea boot in brown, side profile"
-      },
-      {
-        "art": "chelsea",
-        "alt": "The Chelsea boot in brown, detail of the elastic gusset"
+        "alt": "The Chelsea — Brown, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1777987601677-3059be0e1388"
       }
     ],
     "tags": [
@@ -194,11 +182,8 @@
     "images": [
       {
         "art": "penny",
-        "alt": "The Penny loafer in saddle tan, side profile"
-      },
-      {
-        "art": "penny",
-        "alt": "The Penny loafer in saddle tan, detail of the penny strap"
+        "alt": "The Penny — Saddle Tan, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1777987601447-266e128de448"
       }
     ],
     "tags": [
@@ -236,11 +221,8 @@
     "images": [
       {
         "art": "penny",
-        "alt": "The Penny loafer in black, side profile"
-      },
-      {
-        "art": "penny",
-        "alt": "The Penny loafer in black, detail of the penny strap"
+        "alt": "The Penny — Black, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1570800493677-12a7ad3d4d86"
       }
     ],
     "tags": [
@@ -279,11 +261,8 @@
     "images": [
       {
         "art": "court",
-        "alt": "The Court sneaker in white, side profile"
-      },
-      {
-        "art": "court",
-        "alt": "The Court sneaker in white, detail of the lacing"
+        "alt": "The Court — White, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1561282109-3a8f490997cc"
       }
     ],
     "tags": [
@@ -323,11 +302,8 @@
     "images": [
       {
         "art": "court",
-        "alt": "The Court sneaker in navy, side profile"
-      },
-      {
-        "art": "court",
-        "alt": "The Court sneaker in navy, detail of the lacing"
+        "alt": "The Court — Navy, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1561282109-3a8f490997cc"
       }
     ],
     "tags": [
@@ -365,11 +341,8 @@
     "images": [
       {
         "art": "stiletto",
-        "alt": "The Stiletto pump in black, side profile"
-      },
-      {
-        "art": "stiletto",
-        "alt": "The Stiletto pump in black, detail of the heel"
+        "alt": "The Stiletto — Black, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1618274158630-bc47a614b3a5"
       }
     ],
     "tags": [
@@ -408,11 +381,8 @@
     "images": [
       {
         "art": "stiletto",
-        "alt": "The Stiletto pump in nude, side profile"
-      },
-      {
-        "art": "stiletto",
-        "alt": "The Stiletto pump in nude, detail of the heel"
+        "alt": "The Stiletto — Nude, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1535043934128-cf0b28d52f95"
       }
     ],
     "tags": [
@@ -450,11 +420,8 @@
     "images": [
       {
         "art": "ballet",
-        "alt": "The Ballet flat in black, side profile"
-      },
-      {
-        "art": "ballet",
-        "alt": "The Ballet flat in black, detail of the vamp bow"
+        "alt": "The Ballet — Black, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1712512343634-f64161d3daa6"
       }
     ],
     "tags": [
@@ -493,11 +460,8 @@
     "images": [
       {
         "art": "ballet",
-        "alt": "The Ballet flat in blush, side profile"
-      },
-      {
-        "art": "ballet",
-        "alt": "The Ballet flat in blush, detail of the vamp bow"
+        "alt": "The Ballet — Blush, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1712512343634-f64161d3daa6"
       }
     ],
     "tags": [
@@ -535,11 +499,8 @@
     "images": [
       {
         "art": "ankle",
-        "alt": "The Ankle boot in black suede, side profile"
-      },
-      {
-        "art": "ankle",
-        "alt": "The Ankle boot in black suede, detail of the heel"
+        "alt": "The Ankle — Black Suede, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1763661300203-aa3e2702f510"
       }
     ],
     "tags": [
@@ -577,11 +538,8 @@
     "images": [
       {
         "art": "ankle",
-        "alt": "The Ankle boot in cognac suede, side profile"
-      },
-      {
-        "art": "ankle",
-        "alt": "The Ankle boot in cognac suede, detail of the heel"
+        "alt": "The Ankle — Cognac Suede, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1632690642793-a270624dd20d"
       }
     ],
     "tags": [
@@ -618,11 +576,8 @@
     "images": [
       {
         "art": "strappy",
-        "alt": "The Strappy sandal in gold, side profile"
-      },
-      {
-        "art": "strappy",
-        "alt": "The Strappy sandal in gold, detail of the ankle strap"
+        "alt": "The Strappy — Gold, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1784821926276-401342334349"
       }
     ],
     "tags": [
@@ -661,11 +616,8 @@
     "images": [
       {
         "art": "strappy",
-        "alt": "The Strappy sandal in silver, side profile"
-      },
-      {
-        "art": "strappy",
-        "alt": "The Strappy sandal in silver, detail of the ankle strap"
+        "alt": "The Strappy — Silver, product photo",
+        "photoUrl": "https://images.unsplash.com/photo-1637538074119-f41d50e51fd4"
       }
     ],
     "tags": [

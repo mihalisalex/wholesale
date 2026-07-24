@@ -1,6 +1,6 @@
 "use client";
 
-import { ProductLineArt, type ProductArtKey } from "@/components/icons/ProductLineArt";
+import { ProductThumb } from "@/components/product/ProductThumb";
 import { formatCurrency, pairsForPackages } from "@/lib/format";
 import { useCart } from "@/hooks/useCart";
 import type { CartItem } from "@/types/cart";
@@ -13,10 +13,14 @@ export function CartLineItem({ item }: { item: CartItem }) {
   return (
     <div className="flex gap-4 py-5 border-b border-ink/10">
       <div
-        className="w-20 h-16 shrink-0 rounded-brand-sm p-2 flex items-center justify-center"
+        className="relative w-20 h-16 shrink-0 rounded-brand-sm overflow-hidden flex items-center justify-center"
         style={{ background: `${item.colorHex}14` }}
       >
-        <ProductLineArt art={item.art as ProductArtKey} className="w-full h-full text-ink" />
+        <ProductThumb
+          image={{ art: item.art, alt: item.name, photoUrl: item.photoUrl }}
+          imgClassName="w-full h-full object-cover"
+          fallbackClassName="w-full h-full p-2 text-ink"
+        />
       </div>
 
       <div className="flex-1 min-w-0">

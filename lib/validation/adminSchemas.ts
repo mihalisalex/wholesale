@@ -18,7 +18,7 @@ export const productInputSchema = z.object({
   packageSize: z.literal(8),
   pricePerPackage: z.number().nonnegative(),
   images: z
-    .array(z.object({ art: z.string().min(1), alt: z.string().min(1) }))
+    .array(z.object({ art: z.string().min(1), alt: z.string().min(1), photoUrl: z.string().optional() }))
     .min(1, "Pick at least one placeholder style icon"),
   tags: z.array(z.string().min(1)),
   stockStatus: z.enum(["in-stock", "low-stock", "made-to-order"]),

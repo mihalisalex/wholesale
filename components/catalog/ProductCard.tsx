@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProductLineArt, type ProductArtKey } from "@/components/icons/ProductLineArt";
+import { ProductThumb } from "@/components/product/ProductThumb";
 import { formatCurrency } from "@/lib/format";
 import type { Product } from "@/types/product";
 
@@ -21,16 +21,24 @@ export function ProductCard({ product }: { product: Product }) {
       href={`/product/${product.slug}`}
       className="group block bg-white border border-ink/10 rounded-brand overflow-hidden transition-transform duration-300 ease-brand hover:-translate-y-1.5 hover:shadow-brand"
     >
-      <div className="relative p-8 sm:p-6" style={{ background: `linear-gradient(160deg, ${product.colorHex}14, #fff)` }}>
+      <div
+        className="relative aspect-[4/3] sm:aspect-square overflow-hidden"
+        style={{ background: `linear-gradient(160deg, ${product.colorHex}14, #fff)` }}
+      >
         {product.isNewArrival && (
-          <span className="absolute top-4 left-4 text-[0.65rem] font-bold uppercase tracking-wide bg-ink text-cream rounded-full px-2.5 py-1">
+          <span className="absolute top-4 left-4 z-10 text-[0.65rem] font-bold uppercase tracking-wide bg-ink text-cream rounded-full px-2.5 py-1">
             New
           </span>
         )}
-        <span className="absolute top-4 right-4 text-[0.65rem] font-bold uppercase tracking-wide bg-white/80 text-ink rounded-full px-2.5 py-1">
+        <span className="absolute top-4 right-4 z-10 text-[0.65rem] font-bold uppercase tracking-wide bg-white/80 text-ink rounded-full px-2.5 py-1">
           {product.gender === "men" ? "Men's" : product.gender === "women" ? "Women's" : "Unisex"}
         </span>
-        <ProductLineArt art={product.images[0]?.art as ProductArtKey} className="w-full h-40 sm:h-28 text-ink" />
+        <ProductThumb
+          image={product.images[0]}
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          imgClassName="w-full h-full object-cover transition-transform duration-500 ease-brand group-hover:scale-105"
+          fallbackClassName="w-full h-full p-8 sm:p-6 text-ink"
+        />
       </div>
       <div className="p-5">
         <p className="text-[0.68rem] uppercase tracking-wide text-ink/40 mb-1">{product.collection}</p>

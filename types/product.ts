@@ -5,9 +5,11 @@ export type ProductCategory = "sneakers" | "boots" | "loafers" | "sandals" | "he
 export type ProductGender = "men" | "women" | "unisex";
 
 export interface ProductImage {
-  /** Icon key rendered by ProductLineArt, used as a placeholder "photo" */
+  /** Icon key rendered by ProductLineArt, used as a fallback when photoUrl is absent */
   art: string;
   alt: string;
+  /** Placeholder product photography (stock imagery) shown in place of the line-art icon when set */
+  photoUrl?: string;
 }
 
 export interface Product {

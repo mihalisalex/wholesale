@@ -37,6 +37,7 @@ export function ProductInfo({ product }: { product: Product }) {
         name: product.name,
         sku: product.sku,
         art: product.images[0]?.art ?? "",
+        photoUrl: product.images[0]?.photoUrl,
         color: product.color,
         colorHex: product.colorHex,
         pricePerPackage: product.pricePerPackage,
